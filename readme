@@ -1,0 +1,4 @@
+golphook.fun alpha
+
+conan install . -if _fakewin/conan/ --build missing --settings arch=x86
+conan install . -if conan/ --build missing --settings arch=x86

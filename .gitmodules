@@ -1,0 +1,6 @@
+[submodule "exts/minhook"]
+	path = exts/minhook
+	url = https://github.com/TsudaKageyu/minhook.git
+[submodule "exts/directx"]
+	path = exts/directx
+	url = https://github.com/ReactiioN1337/DirectX-SDK.git
