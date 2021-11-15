@@ -5,14 +5,18 @@
 #ifndef GOLPHOOK_FUN_APP_HH
 #define GOLPHOOK_FUN_APP_HH
 
-#include "plog/Log.h"
-#include "nuklear.h"
+#include "CommonIncludes.hh"
 
-#include "Windows.h"
+#include "Utils/SharedObject.hh"
+#include "Utils/Utils.hh"
+
 #include "MinHook.h"
-#include "d3d9.h"
 
-class app {
+class App: public SharedObject<App> {
+    public:
+
+         static void init(HMODULE withModuleHandle);
+         void run();
 
 };
 

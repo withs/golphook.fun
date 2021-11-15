@@ -2,8 +2,15 @@
 // Created by fleur on 14/11/2021.
 //
 
+#include "thread"
+
 #include "App/App.hh"
 
-int main() {
-    return 1;
+bool __stdcall DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
+    if ( ul_reason_for_call == DLL_PROCESS_ATTACH ) {
+        std::thread appLoop(App::init, hModule);
+        appLoop.detach();
+    }
+
+    return TRUE;
 }
