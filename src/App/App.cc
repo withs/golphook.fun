@@ -4,7 +4,7 @@
 
 #include "App.hh"
 
-void App::init(HMODULE withModuleHandle) {
+void App::bootstrap(HMODULE withModuleHandle) {
     App::makeShared();
 
     Utils::allocateConsole();
@@ -12,14 +12,16 @@ void App::init(HMODULE withModuleHandle) {
     static plog::ColorConsoleAppender<plog::TxtFormatter> consoleAppender;
     plog::init(plog::debug, &consoleAppender);
 
-    if ( MH_Initialize() != MH_OK ) {
-        throw FatalError::CoreInitException("Failed to initialize minhook");
-        return;
-    }
+    Utils::waitForModule({ "client.dll", "engine.dll", "vstdlib.dll", "inputsystem.dll", "vguimatsurface.dll"}, 15);
 
-    Utils::waitForModule({ "client.dll", "engine.dll", "vstdlib.dll"}, 5);
+    App::Get().io.windHandle = FindWindowA(0, "Counter-Strike: Global Offensive");
+
+    Interfaces::makeShared();
+    Hooks::makeShared();
 
     App::Get().run();
+
+    Hooks::Get().removeHooks();
 
     Utils::freeConsole();
     FreeLibraryAndExitThread(withModuleHandle, 0);

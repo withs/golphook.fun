@@ -10,13 +10,23 @@
 #include "Utils/SharedObject.hh"
 #include "Utils/Utils.hh"
 
-#include "MinHook.h"
+#include "Sdk/Interfaces.hh"
+#include "Hooks/Hooks.hh"
+
+struct AppIo {
+    int32_t windHeight = 0;
+    int32_t windWidth = 0;
+
+    HWND windHandle = nullptr;
+};
 
 class App: public SharedObject<App> {
     public:
 
-         static void init(HMODULE withModuleHandle);
+         static void bootstrap(HMODULE withModuleHandle);
          void run();
+
+         AppIo io { };
 
 };
 

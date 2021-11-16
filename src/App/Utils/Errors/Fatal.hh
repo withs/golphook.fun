@@ -12,6 +12,7 @@
 class FatalError{
 
     public:
+
          class CoreInitException : public std::exception {
              private:
                   std::string _error{};
@@ -20,10 +21,50 @@ class FatalError{
 
                   const char* what() const noexcept override {
                       PLOG_FATAL << _error;
-                      MessageBoxA(0, "Fatal error", _error.c_str(), MB_OK | MB_ICONERROR);
+                      MessageBoxA(0, "Fatal error (Init)", _error.c_str(), MB_OK | MB_ICONERROR);
                       return _error.c_str();
                   }
          };
+
+        class CreateInterfaceError : public std::exception {
+            private:
+                std::string _error{};
+            public:
+                 CreateInterfaceError(std::string withError): _error{withError} { }
+
+                const char* what() const noexcept override {
+                    PLOG_FATAL << _error;
+                    MessageBoxA(0, "Fatal error (Interfaces)", _error.c_str(), MB_OK | MB_ICONERROR);
+                    return _error.c_str();
+                }
+        };
+
+        class GetModuleProcAddrError : public std::exception {
+            private:
+                std::string _error{};
+            public:
+                 GetModuleProcAddrError(std::string withError) : _error{withError} { }
+
+                const char* what() const noexcept override {
+                PLOG_FATAL << _error;
+                MessageBoxA(0, "Fatal error (GetModuleProcAddr)", _error.c_str(), MB_OK | MB_ICONERROR);
+                return _error.c_str();
+                }
+        };
+
+         class ApplyHookError: public std::exception {
+             private:
+                  std::string _error{};
+             public:
+                  ApplyHookError(std::string withError) : _error{withError} { }
+
+                  const char* what() const noexcept override {
+                      PLOG_FATAL << _error;
+                      MessageBoxA(0, "Fatal error (ApplyHookError)", _error.c_str(), MB_OK | MB_ICONERROR);
+                      return _error.c_str();
+                  }
+         };
+
 };
 
 #endif //GOLPHOOK_FUN_FATAL_HH

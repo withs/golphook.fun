@@ -7,7 +7,9 @@
 
 
 class Consts {
-
+    public:
+         static constexpr float pi = 3.14159265f;
+         static constexpr float radian = pi / 180.f;
 };
 
 

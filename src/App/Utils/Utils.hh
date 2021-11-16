@@ -7,12 +7,16 @@
 
 #include "CommonIncludes.hh"
 
+#include "Errors/Fatal.hh"
+
 class Utils {
     public:
          static void allocateConsole();
          static void freeConsole();
 
          static void waitForModule(std::vector<std::string> inModulesList, uint16_t withTimeout);
+
+         static std::string stringAlign(std::string fromString, uint16_t withSpaces, std::string andSep) noexcept;
 };
 
 

@@ -18,8 +18,5 @@
 #include "plog/Log.h"
 #include "plog/Formatters/TxtFormatter.h"
 #include "plog/Appenders/ColorConsoleAppender.h"
-#include "nuklear.h"
-
-#include "Utils/Errors/Fatal.hh"
 
 #endif //GOLPHOOK_FUN_COMMONINCLUDES_HH

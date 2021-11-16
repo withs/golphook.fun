@@ -51,6 +51,7 @@ void Utils::waitForModule(std::vector<std::string> inModulesList, uint16_t withT
                 totalWaited++;
             } else {
                 PLOGD << "some module arn't laoded\n";
+                throw FatalError::CoreInitException("Some game module failed to load");
                 break;
             }
         } else {
@@ -59,4 +60,16 @@ void Utils::waitForModule(std::vector<std::string> inModulesList, uint16_t withT
         }
     }
 
+}
+
+std::string Utils::stringAlign(std::string fromString, uint16_t withSpaces, std::string andSep) noexcept {
+    std::stringstream final;
+    final << fromString;
+
+    int32_t ss;
+    if ( ( ss = fromString.length() - withSpaces) < 0 ) ss *= -1;
+    for ( uint16_t i = 0; i != ss; i++ ) final << " ";
+
+    final << andSep << " ";
+    return final.str();
 }
