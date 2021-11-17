@@ -11,6 +11,7 @@
 
 #include "Hooks/EndScene.hh"
 #include "Hooks/WndProc.hh"
+#include "Hooks/LockCursor.hh"
 
 #include "MinHook.h"
 

@@ -11,14 +11,14 @@
 #include "d3d9.h"
 #include "d3dx9.h"
 
-typedef bool(__stdcall* oFn)(LPDIRECT3DDEVICE9 withDevice);
+typedef bool(__stdcall* oFnEndScene)(LPDIRECT3DDEVICE9 withDevice);
 
 class EndScene {
     public:
          static inline void* d3d9DeviceTable[119];
          static inline LPDIRECT3DDEVICE9 d3dDevice = nullptr;
 
-         static inline oFn original;
+         static inline oFnEndScene original;
          static bool __stdcall hooked(LPDIRECT3DDEVICE9 withDevice);
 
          static void getDevice();

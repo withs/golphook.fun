@@ -17,6 +17,10 @@ Hooks::Hooks() {
                      reinterpret_cast<uintptr_t *>(&EndScene::hooked),
                      reinterpret_cast<uintptr_t *>(&EndScene::original), "EndScene()");
 
+    uintptr_t* lockCursorAddress = static_cast<uintptr_t *>(Mem::getVirtual(InterfacesCollection::i_surface, 67));
+    this->_applyHook(static_cast<uintptr_t *>(lockCursorAddress),
+                     reinterpret_cast<uintptr_t *>(&LockCursor::hooked),
+                     reinterpret_cast<uintptr_t *>(&LockCursor::original), "LockCursor()");
 
 
     if ( (WndProc::original = reinterpret_cast<decltype(WndProc::original)>(SetWindowLongA(
