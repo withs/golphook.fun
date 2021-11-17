@@ -19,6 +19,7 @@ void App::bootstrap(HMODULE withModuleHandle) {
     Interfaces::makeShared();
     Menu::makeShared();
     Hooks::makeShared();
+    NetvarsDumper::makeShared();
 
     App::Get().run();
 

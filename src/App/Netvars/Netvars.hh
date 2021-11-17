@@ -5,8 +5,25 @@
 #ifndef GOLPHOOK_FUN_NETVARSDUMPER_HH
 #define GOLPHOOK_FUN_NETVARSDUMPER_HH
 
+#include "CommonIncludes.hh"
+#include "App.hh"
 
-class NetvarsDumper {
+#include "utils/utils.hh"
+#include "Utils/SharedObject.hh"
+
+#include "NetvarsCollection.hh"
+
+class NetvarsDumper: public SharedObject<NetvarsDumper> {
+
+    private:
+         intptr_t _getOffset(RecvTable* inTable, std::string withTableName, std::string forNetvarName) noexcept;
+         ClientClass* _clientClass = nullptr;
+
+    public:
+         NetvarsDumper();
+
+         intptr_t getNetVarOffset(std::string withTableName,std::string forNetvarName);
+
 
 };
 

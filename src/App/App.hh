@@ -13,6 +13,7 @@
 #include "Sdk/Interfaces.hh"
 #include "Hooks/Hooks.hh"
 #include "Render/Menu.hh"
+#include "Netvars/Netvars.hh"
 
 struct AppIo {
     int32_t windHeight = 0;

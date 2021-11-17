@@ -6,8 +6,9 @@
 #define GOLPHOOK_FUN_NETVARSCOLLECTINO_HH
 
 
-class NetvarsCollectino {
-
+class NetvarsCollection {
+    public:
+         static inline uintptr_t n_localPlayer;
 };
 
 
