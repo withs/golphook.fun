@@ -22,7 +22,6 @@ class Interfaces: public SharedObject<Interfaces> {
 
         template<typename T>
         T* _getInterface(std::string fromModuleName, std::string withName) {
-            // TODO: regarder sir c_str retourne un const et voir si avec un const cast ca fix le pb
             HMODULE moduleHandle;
             oCreateInterface pCreateInterface;
 

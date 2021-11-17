@@ -7,10 +7,7 @@
 bool __stdcall EndScene::hooked(LPDIRECT3DDEVICE9 withDevice) {
     if ( !EndScene::d3dDevice ) {
         EndScene::d3dDevice = withDevice;
-        PLOGD << "hello from endscene";
     }
-
-    PLOGD << "hello from endscene 2";
 
     return EndScene::original(EndScene::d3dDevice);
 }

@@ -17,11 +17,12 @@ class FatalError{
              private:
                   std::string _error{};
              public:
-                  CoreInitException(std::string withError) : _error{withError} { }
+                  CoreInitException(std::string withError) : _error{withError} {
+                      PLOG_FATAL << _error;
+                      MessageBoxA(0, _error.c_str(), "Fatal error (Init)", MB_OK | MB_ICONERROR);
+                  }
 
                   const char* what() const noexcept override {
-                      PLOG_FATAL << _error;
-                      MessageBoxA(0, "Fatal error (Init)", _error.c_str(), MB_OK | MB_ICONERROR);
                       return _error.c_str();
                   }
          };
@@ -30,11 +31,12 @@ class FatalError{
             private:
                 std::string _error{};
             public:
-                 CreateInterfaceError(std::string withError): _error{withError} { }
+                 CreateInterfaceError(std::string withError): _error{withError} {
+                     PLOG_FATAL << _error;
+                     MessageBoxA(0, _error.c_str(), "Fatal error (Interfaces)", MB_OK | MB_ICONERROR);
+                 }
 
                 const char* what() const noexcept override {
-                    PLOG_FATAL << _error;
-                    MessageBoxA(0, "Fatal error (Interfaces)", _error.c_str(), MB_OK | MB_ICONERROR);
                     return _error.c_str();
                 }
         };
@@ -43,12 +45,13 @@ class FatalError{
             private:
                 std::string _error{};
             public:
-                 GetModuleProcAddrError(std::string withError) : _error{withError} { }
+                 GetModuleProcAddrError(std::string withError) : _error{withError} {
+                     PLOG_FATAL << _error;
+                     MessageBoxA(0, _error.c_str(), "Fatal error (GetModuleProcAddr)", MB_OK | MB_ICONERROR);
+                 }
 
                 const char* what() const noexcept override {
-                PLOG_FATAL << _error;
-                MessageBoxA(0, "Fatal error (GetModuleProcAddr)", _error.c_str(), MB_OK | MB_ICONERROR);
-                return _error.c_str();
+                    return _error.c_str();
                 }
         };
 
@@ -56,11 +59,12 @@ class FatalError{
              private:
                   std::string _error{};
              public:
-                  ApplyHookError(std::string withError) : _error{withError} { }
+                  ApplyHookError(std::string withError) : _error{withError} {
+                      PLOG_FATAL << _error;
+                      MessageBoxA(0, _error.c_str(), "Fatal error (ApplyHookError)", MB_OK | MB_ICONERROR);
+                  }
 
                   const char* what() const noexcept override {
-                      PLOG_FATAL << _error;
-                      MessageBoxA(0, "Fatal error (ApplyHookError)", _error.c_str(), MB_OK | MB_ICONERROR);
                       return _error.c_str();
                   }
          };
