@@ -10,6 +10,7 @@
 #include "../Utils/SharedObject.hh"
 
 #include "Hooks/EndScene.hh"
+#include "Hooks/WndProc.hh"
 
 #include "MinHook.h"
 

@@ -7,7 +7,17 @@
 bool __stdcall EndScene::hooked(LPDIRECT3DDEVICE9 withDevice) {
     if ( !EndScene::d3dDevice ) {
         EndScene::d3dDevice = withDevice;
+
+        int32_t w, h;
+        InterfacesCollection::i_engineClient->GetScreenSize(w, h);
+        App::Get().io.windHeight= h;
+        App::Get().io.windWidth = w;
+
+        Menu::Get().bootstrap();
     }
+
+    if ( Menu::Get().isMenuOpened )
+        Menu::Get().render();
 
     return EndScene::original(EndScene::d3dDevice);
 }

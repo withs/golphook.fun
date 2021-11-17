@@ -12,6 +12,7 @@
 
 #include "Sdk/Interfaces.hh"
 #include "Hooks/Hooks.hh"
+#include "Render/Menu.hh"
 
 struct AppIo {
     int32_t windHeight = 0;

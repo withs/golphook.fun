@@ -22,6 +22,7 @@ add_library(${PROJECT_NAME} SHARED ${min} ${SRC_FILES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC exts/minhook/include)
 target_include_directories(${PROJECT_NAME} PUBLIC exts/directx/Include)
+target_include_directories(${PROJECT_NAME} PUBLIC exts/nuklear)
 
 target_include_directories(${PROJECT_NAME} PUBLIC src/App)
 

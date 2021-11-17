@@ -17,24 +17,26 @@ void App::bootstrap(HMODULE withModuleHandle) {
     App::Get().io.windHandle = FindWindowA(0, "Counter-Strike: Global Offensive");
 
     Interfaces::makeShared();
+    Menu::makeShared();
     Hooks::makeShared();
 
     App::Get().run();
 
     Hooks::Get().removeHooks();
+    Menu::Get().release();
 
     Utils::freeConsole();
     FreeLibraryAndExitThread(withModuleHandle, 0);
 }
 
 void App::run() {
-
+    Beep( 670, 200 );
+    Beep( 730, 150 );
     PLOG_INFO << "hello golphook.fun";
 
     while ( true ) {
 
         if ( GetAsyncKeyState(VK_INSERT) & 1 ) {
-
         }
 
         if ( GetAsyncKeyState(VK_END) & 1 ) {
