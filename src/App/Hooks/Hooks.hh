@@ -19,6 +19,7 @@
 #include "Hooks/WndProc.hh"
 #include "Hooks/LockCursor.hh"
 #include "Hooks/CreateMoove.hh"
+#include "Hooks/FrameStageNotify.hh"
 
 class Hooks: public SharedObject<Hooks> {
     public:

@@ -39,6 +39,10 @@ Hooks::Hooks() {
                      reinterpret_cast<uintptr_t *>(&CreateMoove::original), "CreateMoove()");
 
 
+    uintptr_t* frameStageAddress = static_cast<uintptr_t *>(Mem::getVirtual(InterfacesCollection::i_baseClient, 37));
+    this->_applyHook(static_cast<uintptr_t *>(frameStageAddress),
+                     reinterpret_cast<uintptr_t *>(&FrameStageNotify::hooked),
+                     reinterpret_cast<uintptr_t *>(&FrameStageNotify::original), "FrameStageNotify()");
 
     if (MH_EnableHook(MH_ALL_HOOKS) == MH_OK)
         LOG_INFO << "minhooks success";
