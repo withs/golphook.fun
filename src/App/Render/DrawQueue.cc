@@ -38,3 +38,7 @@ void DrawQueue::clear() noexcept {
 }
 
 
+std::shared_ptr<DrawToolBase> DrawQueue::operator[](int32_t index) {
+    std::shared_lock lock(this->_queueMutex);
+    return this->_queue.at(index);
+}

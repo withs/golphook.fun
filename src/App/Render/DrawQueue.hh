@@ -30,6 +30,8 @@ class DrawQueue: public SharedObject<DrawQueue> {
          std::vector<std::shared_ptr<DrawToolBase>>::iterator end() noexcept;
 
          void clear() noexcept;
+
+         std::shared_ptr<DrawToolBase> operator[](int32_t index);
 };
 
 
