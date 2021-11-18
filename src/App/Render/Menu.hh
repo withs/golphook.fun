@@ -41,6 +41,7 @@ class Menu: public SharedObject<Menu> {
          bool isMenuOpened = false;
 
          void render();
+         void renderShadow();
          void bootstrap();
          void release();
 

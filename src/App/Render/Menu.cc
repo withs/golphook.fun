@@ -215,3 +215,11 @@ void Menu::render() {
 
     }
 }
+
+void Menu::renderShadow() {
+    D3DXVECTOR2 line[2];
+    line[0] = D3DXVECTOR2(1.f, 1.f);
+    line[1] = D3DXVECTOR2(App::Get().io.windWidth * 1.f, 1.f);
+    DrawItemsCollection::Get().l_line->SetWidth((App::Get().io.windHeight * 2.f));
+    DrawItemsCollection::Get().l_line->Draw(line, 2, D3DCOLOR_ARGB(40, 0, 0, 0));
+}
