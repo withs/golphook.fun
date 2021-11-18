@@ -6,8 +6,53 @@
 #define GOLPHOOK_FUN_DRAWTOOLS_HH
 
 
-class DrawTools {
+#include "Utils/Structs/Color.hh"
+#include "Utils/Structs/Vector.hh"
 
+
+struct DrawToolBase {
+
+    constexpr DrawToolBase() = default;
+    inline ~DrawToolBase() = default;;
+
+    Color_t _color { };
+    Vec2<uint32_t> _pos { };
+
+    uint32_t a = 0;
+
+    virtual bool draw() = 0;
+};
+
+struct DrawRect final: public DrawToolBase {
+    Color_t _color { };
+    Vec2<uint32_t> _pos { };
+
+    DrawRect(Vec2<uint32_t> toPos, Color_t andColor) {
+        this->_pos = toPos;
+        this->_color = andColor;
+    };
+    bool draw() override;
+
+    constexpr DrawRect() = default;
+    inline ~DrawRect() = default;;
+};
+
+
+struct DrawTextb final: public DrawToolBase {
+
+    std::string _content;
+    Color_t _color { };
+    Vec2<uint32_t> _pos { };
+
+    DrawTextb(Vec2<uint32_t> toPos, std::string withText, Color_t andColor) {
+        this->_pos = toPos;
+        this->_color = andColor;
+        this->_content = withText;
+    };
+    bool draw() override;
+
+    constexpr DrawTextb() = default;
+    inline ~DrawTextb() = default;;
 };
 
 

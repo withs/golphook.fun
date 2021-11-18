@@ -13,12 +13,20 @@ bool __stdcall EndScene::hooked(LPDIRECT3DDEVICE9 withDevice) {
         App::Get().io.windHeight= h;
         App::Get().io.windWidth = w;
 
+        DrawItemsCollection::makeShared();
         Menu::Get().bootstrap();
     }
+
+    App::Get().caca();
 
     if ( Menu::Get().isMenuOpened )
         Menu::Get().render();
 
+    for ( auto& elem: DrawQueue::Get() ) {
+        PLOGD << "draw";
+        elem->draw();
+    }
+    DrawQueue::Get().clear();
     return EndScene::original(EndScene::d3dDevice);
 }
 

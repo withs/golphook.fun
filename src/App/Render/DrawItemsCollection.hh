@@ -5,9 +5,22 @@
 #ifndef GOLPHOOK_FUN_DRAWITEMSCOLLECTION_HH
 #define GOLPHOOK_FUN_DRAWITEMSCOLLECTION_HH
 
+#include "CommonIncludes.hh"
+#include "App.hh"
 
-class DrawItemsCollection {
+#include "Utils/SharedObject.hh"
 
+#include "d3d9.h"
+#include "d3dx9.h"
+
+class DrawItemsCollection: public SharedObject<DrawItemsCollection> {
+
+    public:
+         DrawItemsCollection();
+         ~DrawItemsCollection();
+
+         ID3DXFont* f_lucida;
+         ID3DXLine* l_line;
 };
 
 
