@@ -39,6 +39,8 @@ class NetvarsCollection {
          static inline uintptr_t m_flC4Blow;
          static inline uintptr_t m_hBombDefuser;
          static inline uintptr_t m_flDefuseCountDown;
+
+         static inline uintptr_t m_vecOrigin;
 };
 
 #endif //GOLPHOOK_FUN_NETVARSCOLLECTINO_HH

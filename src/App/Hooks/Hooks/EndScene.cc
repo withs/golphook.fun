@@ -23,7 +23,6 @@ bool __stdcall EndScene::hooked(LPDIRECT3DDEVICE9 withDevice) {
         Menu::Get().render();
 
     for ( auto& elem: DrawQueue::Get() ) {
-        PLOGD << "draw";
         elem->draw();
     }
     DrawQueue::Get().clear();

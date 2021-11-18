@@ -59,7 +59,16 @@ void App::run() {
 
 
         if ( GetAsyncKeyState(0x41) & 1 ) {
-            Entity_t* test = InterfacesCollection::i_entityList->getClientEntity(1);
+            /*
+            for ( uint32_t pIndex = 0; pIndex <= 16; pIndex++ ) {
+                Entity_t* player = InterfacesCollection::i_entityList->getClientEntity(pIndex);
+                if ( player ) {
+                    PLOGD << player->health() << " - " << player->isAlive();
+                }
+            }*/
+
+            Entity_t* player = InterfacesCollection::i_entityList->getClientEntity(InterfacesCollection::i_engineClient->GetLocalPlayer());
+            PLOGD << player->health();
         }
 
 
