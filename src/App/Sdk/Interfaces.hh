@@ -7,9 +7,11 @@
 
 #include "CommonIncludes.hh"
 
-#include "Utils/Errors/Fatal.hh"
 #include "Utils/SharedObject.hh"
+#include "Utils/Errors/Fatal.hh"
+#include "Utils/Memory/Mem.hh"
 #include "Utils/Utils.hh"
+
 #include "InterfacesCollection.hh"
 
 typedef void*(*oCreateInterface)(char*, int);

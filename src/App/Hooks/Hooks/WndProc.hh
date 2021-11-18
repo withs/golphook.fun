@@ -6,7 +6,11 @@
 #define GOLPHOOK_FUN_WNDPROC_HH
 
 #include "CommonIncludes.hh"
-#include "../../App.hh"
+
+#include "App.hh"
+
+#include "nuklear.h"
+#include "nuklear_d3d9.h"
 
 class WndProc {
     public:

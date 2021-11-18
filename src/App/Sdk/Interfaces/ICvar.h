@@ -5,8 +5,6 @@
 #ifndef GOLPHOOK_FUN_ICVAR_H
 #define GOLPHOOK_FUN_ICVAR_H
 
-#include "Utils/Memory/Mem.hh"
-
 #include "IConVar.h"
 
 class ICvar {

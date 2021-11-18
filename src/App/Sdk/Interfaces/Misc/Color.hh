@@ -5,13 +5,7 @@
 #ifndef GOLPHOOK_COLOR_HH
 #define GOLPHOOK_COLOR_HH
 
-
-
-#include <cstdint>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
+#include "CommonIncludes.hh"
 
 class Color
 {

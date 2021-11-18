@@ -6,12 +6,16 @@
 #define GOLPHOOK_FUN_NETVARSDUMPER_HH
 
 #include "CommonIncludes.hh"
-#include "App.hh"
 
-#include "utils/utils.hh"
+#include "Utils/Utils.hh"
 #include "Utils/SharedObject.hh"
+#include "Utils/Errors/Fatal.hh"
 
 #include "NetvarsCollection.hh"
+
+#include "Sdk/InterfacesCollection.hh"
+#include "Sdk/Interfaces/client_class.h"
+
 
 class NetvarsDumper: public SharedObject<NetvarsDumper> {
 
@@ -23,8 +27,6 @@ class NetvarsDumper: public SharedObject<NetvarsDumper> {
          NetvarsDumper();
 
          intptr_t getNetVarOffset(std::string withTableName,std::string forNetvarName);
-
-
 };
 
 

@@ -9,13 +9,14 @@
 
 #include "d3d9.h"
 #include "d3dx9.h"
+#include "nuklear.h"
 
 struct Color_t {
     public:
 
          uint32_t r, g, b, a;
 
-         Color_t(): r(0), g(0), b(0), a(0) {}
+        Color_t() = default;
 
         Color_t(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
             : r(r), g(g), b(b), a(a) {}

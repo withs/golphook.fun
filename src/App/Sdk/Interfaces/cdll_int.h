@@ -5,10 +5,6 @@
 #ifndef GOLPHOOK_FUN_CDLL_INT_H
 #define GOLPHOOK_FUN_CDLL_INT_H
 
-class Memory;
-
-#include "CommonIncludes.hh"
-
 #include "client_class.h"
 
 #include "Math/Vector.hpp"

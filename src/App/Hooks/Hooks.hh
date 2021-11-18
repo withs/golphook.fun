@@ -6,14 +6,18 @@
 #define GOLPHOOK_FUN_HOOKSCONTROLLER_HH
 
 #include "CommonIncludes.hh"
-#include "../Utils/Utils.hh"
-#include "../Utils/SharedObject.hh"
+
+#include "MinHook.h"
+
+#include "Utils/SharedObject.hh"
+#include "Utils/Errors/Fatal.hh"
+#include "Utils/Memory/Mem.hh"
+
+#include "Sdk/InterfacesCollection.hh"
 
 #include "Hooks/EndScene.hh"
 #include "Hooks/WndProc.hh"
 #include "Hooks/LockCursor.hh"
-
-#include "MinHook.h"
 
 class Hooks: public SharedObject<Hooks> {
     public:

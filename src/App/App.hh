@@ -7,7 +7,6 @@
 
 #include "CommonIncludes.hh"
 
-#include "Utils/SharedObject.hh"
 #include "Utils/Utils.hh"
 
 #include "Sdk/Interfaces.hh"

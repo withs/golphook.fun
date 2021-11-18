@@ -5,10 +5,9 @@
 #ifndef GOLPHOOK_FUN_DRAWITEMSCOLLECTION_HH
 #define GOLPHOOK_FUN_DRAWITEMSCOLLECTION_HH
 
-#include "CommonIncludes.hh"
-#include "App.hh"
-
 #include "Utils/SharedObject.hh"
+
+#include "Hooks/Hooks/EndScene.hh"
 
 #include "d3d9.h"
 #include "d3dx9.h"

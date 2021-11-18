@@ -59,7 +59,7 @@ void App::run() {
 
 
         if ( GetAsyncKeyState(0x41) & 1 ) {
-
+            Entity_t* test = InterfacesCollection::i_entityList->getClientEntity(1);
         }
 
 

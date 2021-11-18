@@ -5,7 +5,7 @@
 #ifndef GOLPHOOK_FUN_ICONVAR_H
 #define GOLPHOOK_FUN_ICONVAR_H
 
-#include "CommonIncludes.hh"
+#include "Utils/Memory/Mem.hh"
 
 enum class CvarFlags : int {
     fcvar_none = 0,

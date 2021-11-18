@@ -8,7 +8,8 @@ Interfaces::Interfaces() {
 
     PLOGD << "Bootstraping interfaces";
 
-    InterfacesCollection::i_vDebugOverlay = this->_getInterface<IVDebugOverlay>("client.dll", "VClientEntityList003");
+    InterfacesCollection::i_vDebugOverlay = this->_getInterface<IVDebugOverlay>("engine.dll", "VDebugOverlay004");
+    InterfacesCollection::i_entityList = this->_getInterface<EntityList>("client.dll", "VClientEntityList003");
     InterfacesCollection::i_baseClient = this->_getInterface<IBaseClientDLL>("client.dll", "VClient018");
     InterfacesCollection::i_engineClient = this->_getInterface<IVEngineClient>("engine.dll", "VEngineClient014");
     InterfacesCollection::i_console = this->_getInterface<ICvar>("vstdlib.dll", "VEngineCvar007");

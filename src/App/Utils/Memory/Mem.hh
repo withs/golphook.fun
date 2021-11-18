@@ -23,6 +23,11 @@ class Mem {
         static auto getVirtual(void* const thisClass, const uint32_t atIndex) noexcept {
             return reinterpret_cast<void*>((*static_cast<int**>(thisClass))[atIndex]);
         }
+
+         template <class T>
+         static T getValOffset(uintptr_t withOffset, void* inObject) {
+             return *reinterpret_cast< T* >((uintptr_t)inObject + withOffset);
+         }
 };
 
 

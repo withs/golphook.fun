@@ -7,7 +7,7 @@
 
 #include "CommonIncludes.hh"
 
-#include "Errors/Fatal.hh"
+#include "Utils/Errors/Fatal.hh"
 
 class Utils {
     public:

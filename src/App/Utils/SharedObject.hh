@@ -5,7 +5,7 @@
 #ifndef GOLPHOOK_FUN_SHAREDOBJECT_HH
 #define GOLPHOOK_FUN_SHAREDOBJECT_HH
 
-#include "../CommonIncludes.hh"
+#include "memory"
 
 template<class T>
 class SharedObject {

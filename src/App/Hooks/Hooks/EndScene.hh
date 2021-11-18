@@ -6,7 +6,10 @@
 #define GOLPHOOK_FUN_ENDSCENE_HH
 
 #include "CommonIncludes.hh"
-#include "../../App.hh"
+
+#include "Sdk/InterfacesCollection.hh"
+
+#include "App.hh"
 
 #include "d3d9.h"
 #include "d3dx9.h"

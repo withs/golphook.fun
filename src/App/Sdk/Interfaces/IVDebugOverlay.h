@@ -5,8 +5,6 @@
 #ifndef GOLPHOOK_FUN_IVDEBUGOVERLAY_H
 #define GOLPHOOK_FUN_IVDEBUGOVERLAY_H
 
-#include "CommonIncludes.hh"
-
 #include "Math/Vector.hpp"
 #include "Math/QAngle.hpp"
 

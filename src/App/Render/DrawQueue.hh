@@ -5,15 +5,9 @@
 #ifndef GOLPHOOK_FUN_DRAWQUEUE_HH
 #define GOLPHOOK_FUN_DRAWQUEUE_HH
 
-#include "CommonIncludes.hh"
-#include "App.hh"
-
-#include "Utils/SharedObject.hh"
-
 #include "DrawTools.hh"
 #include "DrawItemsCollection.hh"
 
-#include <thread>
 #include <mutex>
 #include <shared_mutex>
 
