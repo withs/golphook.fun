@@ -11,7 +11,7 @@ class Mem {
     public:
 
         // from https://github.com/withs/golphook/blob/8c984421b200d56a5d76c4717766aecb3ad06d45/golphook/src/App/Mem/Mem.cc#L70
-        uint8_t* patternScan(void* module, const char* signature);
+        static uint8_t* patternScan(void* module, const char* signature);
 
          // from https://github.com/bruhmoment21/csgo-imgui-sdk/blob/c35ab6965c36e696fc6a4fd5b204967d82508306/jet-sdk-csgo/src/utilities.hpp#L27
         template <typename T, uint32_t atIndex, typename ...Arguments>

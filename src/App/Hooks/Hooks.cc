@@ -33,6 +33,13 @@ Hooks::Hooks() {
         throw FatalError::ApplyHookError("Failed to apply hook on WndProc");
     }
 
+    uint8_t* createMooveAddr = Mem::patternScan(GetModuleHandleA("client.dll"), "55 8B EC 8B 4D 04 8B");
+    this->_applyHook(reinterpret_cast<uintptr_t *>(createMooveAddr),
+                     reinterpret_cast<uintptr_t *>(&CreateMoove::hooked),
+                     reinterpret_cast<uintptr_t *>(&CreateMoove::original), "CreateMoove()");
+
+
+
     if (MH_EnableHook(MH_ALL_HOOKS) == MH_OK)
         LOG_INFO << "minhooks success";
 

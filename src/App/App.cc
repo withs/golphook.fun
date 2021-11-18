@@ -67,8 +67,8 @@ void App::run() {
                 }
             }*/
 
-            Entity_t* player = InterfacesCollection::i_entityList->getClientEntity(InterfacesCollection::i_engineClient->GetLocalPlayer());
-            PLOGD << player->health();
+            //Entity_t* player = InterfacesCollection::i_entityList->getClientEntity(InterfacesCollection::i_engineClient->GetLocalPlayer());
+            //PLOGD << player->health();
         }
 
 
