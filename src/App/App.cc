@@ -7,7 +7,10 @@
 void App::bootstrap(HMODULE withModuleHandle) {
     App::makeShared();
 
+#ifdef _DEBUG
     Utils::allocateConsole();
+#endif
+
 
     static plog::ColorConsoleAppender<plog::TxtFormatter> consoleAppender;
     plog::init(plog::debug, &consoleAppender);
@@ -29,7 +32,10 @@ void App::bootstrap(HMODULE withModuleHandle) {
     Hooks::Get().removeHooks();
     Menu::Get().release();
 
+#ifdef _DEBUG
     Utils::freeConsole();
+#endif
+
     FreeLibraryAndExitThread(withModuleHandle, 0);
 }
 
