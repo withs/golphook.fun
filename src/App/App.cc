@@ -54,17 +54,17 @@ void App::caca() {
 }
 
 void App::run() {
-    Beep( 670, 200 );
-    Beep( 730, 150 );
-    PLOG_INFO << "hello golphook.fun";
 
     Features::Get().visuals->localPlayer = InterfacesCollection::i_entityList->getClientEntity(
             InterfacesCollection::i_engineClient->GetLocalPlayer()
     );
 
     this->ready = true;
-
     Menu::Get().isMenuOpened = true;
+
+    Beep( 670, 200 );
+    Beep( 730, 150 );
+    PLOG_INFO << "hello golphook.fun";
 
     while ( true ) {
 
@@ -83,6 +83,15 @@ void App::run() {
 
             //Entity_t* player = InterfacesCollection::i_entityList->getClientEntity(InterfacesCollection::i_engineClient->GetLocalPlayer());
             //PLOGD << player->health();
+
+            // PLOGD << NetvarsDumper::Get().getNetVarOffset("DT_BaseAnimating", "m_nForceBone"); -> 9868
+
+            uintptr_t ent = reinterpret_cast<uintptr_t>(InterfacesCollection::i_entityList->getClientEntity(
+                    InterfacesCollection::i_engineClient->GetLocalPlayer()));
+            Entity_t* player = InterfacesCollection::i_entityList->getClientEntity(InterfacesCollection::i_engineClient->GetLocalPlayer());
+
+            Entity_t* abc = (Entity_t*)ent;
+
         }
 
 

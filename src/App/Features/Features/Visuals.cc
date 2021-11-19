@@ -24,8 +24,13 @@ void Visuals::onCreateMoove() {
                      ent->health() > 0 &&
                      ent->team() != this->localPlayer->team()
                 ) {
+
                     if ( Config::Get().currentCfg().snaplines )
                         this->_snapline(ent);
+
+                    if ( Config::Get().currentCfg().boxe )
+                        this->_boxe(ent);
+
                 }
 
             }
@@ -59,9 +64,8 @@ void Visuals::_snapline(Entity_t* ent) {
         std::shared_ptr<DrawLineb> aa;
         aa = std::shared_ptr<DrawLineb>{
                 new DrawLineb(
-                        Vec2<uint32_t>{static_cast<uint32_t>(App::Get().io.windWidth / 2),
-                                       static_cast<uint32_t>(App::Get().io.windHeight)},
-                        Vec2<uint32_t>{static_cast<uint32_t>(screenOut.x), static_cast<uint32_t>(screenOut.y)},
+                        Vec2<int32_t>{static_cast<int32_t>(App::Get().io.windWidth / 2), static_cast<int32_t>(App::Get().io.windHeight)},
+                        Vec2<int32_t>{static_cast<int32_t>(screenOut.x), static_cast<int32_t>(screenOut.y)},
                         1.3f,
                         bc
                 )
@@ -70,6 +74,45 @@ void Visuals::_snapline(Entity_t* ent) {
 
     }
 
+}
+
+void Visuals::_boxe(Entity_t *ent) {
+    Vec3 entPos = ent->origin();
+    Vec3 screenOut { };
+
+    if ( Math::worldToScreen(entPos, screenOut) ) {
+
+        if ( screenOut.x <= 0 ||
+             screenOut.y <= 0 ||
+             screenOut.x >= App::Get().io.windWidth ||
+             screenOut.y >= App::Get().io.windHeight
+                ) {
+            return;
+        }
+
+        Vec3 screenHeadOut { };
+        Vec3 headPos = ent->bone(8);
+        headPos.z += 13;
+
+        if ( Math::worldToScreen(headPos, screenHeadOut) ) {
+
+            Color_t bc { Config::Get().currentCfg().boxeCol.r,
+                         Config::Get().currentCfg().boxeCol.g,
+                         Config::Get().currentCfg().boxeCol.b,
+                         Config::Get().currentCfg().boxeCol.a
+            };
+            std::shared_ptr<DrawRectb> aa;
+            aa = std::shared_ptr<DrawRectb>{
+                    new DrawRectb(
+                                {static_cast<uint32_t>(screenOut.x), static_cast<uint32_t>(screenOut.y)},
+                                screenHeadOut.y,
+                                bc
+                            )
+            };
+            DrawQueue::Get().push(aa);
+
+        }
+    }
 }
 
 void Visuals::_watermark() {

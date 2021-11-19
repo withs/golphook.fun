@@ -23,28 +23,30 @@ struct DrawToolBase {
     virtual bool draw() = 0;
 };
 
-struct DrawRect final: public DrawToolBase {
+struct DrawRectb final: public DrawToolBase {
     Color_t _color { };
     Vec2<uint32_t> _pos { };
+    int16_t _height;
 
-    DrawRect(Vec2<uint32_t> toPos, Color_t andColor) {
+    DrawRectb(Vec2<uint32_t> toPos, int16_t withHeight, Color_t andColor) {
         this->_pos = toPos;
         this->_color = andColor;
+        this->_height = withHeight;
     };
     bool draw() override;
 
-    constexpr DrawRect() = default;
-    inline ~DrawRect() = default;;
+    constexpr DrawRectb() = default;
+    inline ~DrawRectb() = default;;
 };
 
 struct DrawLineb final: public DrawToolBase {
 
     Color_t _color { };
-    Vec2<uint32_t> _pos { };
-    Vec2<uint32_t> _pos2 { };
+    Vec2<int32_t> _pos { };
+    Vec2<int32_t> _pos2 { };
     float _thickness;
 
-    DrawLineb(Vec2<uint32_t> fromPos, Vec2<uint32_t> toPos, float andThickness, Color_t andColor) {
+    DrawLineb(Vec2<int32_t> fromPos, Vec2<int32_t> toPos, float andThickness, Color_t andColor) {
         this->_pos = fromPos;
         this->_pos2 = toPos;
         this->_color = andColor;

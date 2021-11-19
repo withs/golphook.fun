@@ -81,11 +81,25 @@ void Menu::render() {
                     nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
 
                     nk_layout_row_push(this->_ctx, 0.75f);
-                    nk_checkbox_label(this->_ctx, "Boxes", &check);
+                    nk_checkbox_label(this->_ctx, "Boxes", &Config::Get().currentCfg().boxe);
 
-                    if ( check ) {
+                    if ( Config::Get().currentCfg().boxe ) {
                         nk_layout_row_push(this->_ctx, 0.25f);
-                        nk_button_label(this->_ctx, "#FFBB");
+                        if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().boxeCol)), nk_vec2(300,400)) ) {
+                            nk_layout_row_dynamic(this->_ctx, 120, 1);
+
+                            nk_colorf bg = static_cast<nk_colorf>(Config::Get().currentCfg().boxeCol);
+
+                            bg = nk_color_picker(this->_ctx, bg, NK_RGBA);
+                            nk_layout_row_dynamic(this->_ctx, 25, 1);
+                            bg.r = nk_propertyf(this->_ctx, "#R:", 0, bg.r, 1.0f, 0.01f,0.005f);
+                            bg.g = nk_propertyf(this->_ctx, "#G:", 0, bg.g, 1.0f, 0.01f,0.005f);
+                            bg.b = nk_propertyf(this->_ctx, "#B:", 0, bg.b, 1.0f, 0.01f,0.005f);
+                            bg.a = nk_propertyf(this->_ctx, "#A:", 0, bg.a, 1.0f, 0.01f,0.005f);
+
+                            Config::Get().currentCfg().boxeCol = Color_t(bg);
+                            nk_combo_end(this->_ctx);
+                        }
                     }
                     nk_layout_row_end(this->_ctx);
 

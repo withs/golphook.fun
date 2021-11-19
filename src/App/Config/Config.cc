@@ -51,6 +51,12 @@ void Config::loadConfigFromFile(std::filesystem::path fromPath) {
         fromFileConfig.snaplinesCol.b  = inputJson["cfg"]["snaplinesCol"]["b"];
         fromFileConfig.snaplinesCol.a  = inputJson["cfg"]["snaplinesCol"]["a"];
 
+        fromFileConfig.boxe = inputJson["cfg"]["boxe"];
+        fromFileConfig.boxeCol.r = inputJson["cfg"]["boxeCol"]["r"];
+        fromFileConfig.boxeCol.g  = inputJson["cfg"]["boxeCol"]["g"];
+        fromFileConfig.boxeCol.b  = inputJson["cfg"]["boxeCol"]["b"];
+        fromFileConfig.boxeCol.a  = inputJson["cfg"]["boxeCol"]["a"];
+
         fromFileConfig.watermark = inputJson["cfg"]["watermark"];
         fromFileConfig.watermarkCol.r = inputJson["cfg"]["watermarkCol"]["r"];
         fromFileConfig.watermarkCol.g  = inputJson["cfg"]["watermarkCol"]["g"];
@@ -96,6 +102,13 @@ void Config::saveConfigToFile(std::string withName) {
                     {"b", this->currentCfg().snaplinesCol.b},
                     {"a", this->currentCfg().snaplinesCol.a}
             }},
+            {"boxe", this->currentCfg().boxe},
+            {"boxeCol", {
+                                  {"r", this->currentCfg().boxeCol.r},
+                                  {"g", this->currentCfg().boxeCol.g},
+                                  {"b", this->currentCfg().boxeCol.b},
+                                  {"a", this->currentCfg().boxeCol.a}
+                          }},
             {"watermark", this->currentCfg().watermark},
             {"watermarkCol", {
                         {"r", this->currentCfg().watermarkCol.r},

@@ -6,7 +6,80 @@
 
 #include "DrawItemsCollection.hh"
 
-bool DrawRect::draw() {
+bool DrawRectb::draw() {
+    float boxHeight = this->_height > this->_pos.y ? (this->_height - this->_pos.y):(this->_pos.y - this->_height);
+    float boxWidth = boxHeight / 3.5f;
+
+    /*
+     *                 (-)
+     *                  ^
+     *                  |
+     *                  |
+     *  x (-) <- ---------------- -> (+)
+     *                  |
+     *                  |
+     *                  v
+     *                 (+)
+     *                  y
+     * */
+
+
+    // ligne bas
+    int32_t x1 = this->_pos.x - boxWidth;
+    int32_t y1 = this->_pos.y;
+    int32_t x2 = this->_pos.x + boxWidth;
+    int32_t y2 = this->_pos.y;
+    DrawLineb({x1, y1}, {x2, y2}, 1.3f, this->_color).draw();
+
+    // ligne haut
+    x1 = x1;
+    y1 = this->_pos.y - boxHeight;
+    x2 = x2;
+    y2 = this->_pos.y - boxHeight;
+    DrawLineb({x1, y1}, {x2, y2}, 1.3f, this->_color).draw();
+
+    // ligne guauche
+    x1 = this->_pos.x - boxWidth;
+    y1 = this->_pos.y;
+    x2 = this->_pos.x - boxWidth;
+    y2 = this->_pos.y - boxHeight;
+    DrawLineb({x1, y1}, {x2, y2}, 1.3f, this->_color).draw();
+
+    // ligne droite
+    x1 = this->_pos.x + boxWidth;
+    y1 = this->_pos.y;
+    x2 = this->_pos.x + boxWidth;
+    y2 = this->_pos.y - boxHeight;
+    DrawLineb({x1, y1}, {x2, y2}, 1.3f, this->_color).draw();
+
+
+    /*
+    uint32_t x1 = this->_pos.x - boxWidth;
+    uint32_t y1 = this->_pos.y;
+    uint32_t x2 = this->_pos.x + boxWidth;
+    uint32_t y2 = this->_pos.y;
+
+    DrawLineb({x1, y1}, {x2, y2}, 1.3f, this->_color).draw();
+
+    x1 = x1;
+    y1 = this->_pos.y;
+    x2 = x1;
+    y2 = this->_pos.y - boxHeight;
+    DrawLineb({x1, y1}, {x2, y2}, 1.3f, this->_color).draw();
+
+    x1 = this->_pos.x + boxWidth;
+    y1 = this->_pos.y;
+    x2 = this->_pos.x + boxWidth;
+    y2 = this->_pos.y - boxHeight;
+    DrawLineb({x1, y1}, {x2, y2}, 1.3f, this->_color).draw();
+
+    x1 = this->_pos.x - boxWidth;
+    y1 = this->_pos.y - boxHeight;
+    x2 = this->_pos.x + boxWidth;
+    y2 = this->_pos.y - boxHeight;
+    DrawLineb({x1, y1}, {x2, y2}, 1.3f, this->_color).draw();
+    */
+
     return true;
 }
 

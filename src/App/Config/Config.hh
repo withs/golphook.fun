@@ -28,6 +28,9 @@ struct Config_t {
     bool snaplines = false;
     Color_t snaplinesCol = Color_t{ 255, 255, 255, 255 };
 
+    bool boxe = false;
+    Color_t boxeCol = Color_t{ 255, 255, 255, 255 };
+
     bool watermark = false;
     Color_t watermarkCol = Color_t{ 255, 255, 255, 255 };
 
