@@ -11,6 +11,7 @@
 #define NK_INCLUDE_DEFAULT_ALLOCATOR
 #define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
 #define NK_INCLUDE_FONT_BAKING
+#define NK_INCLUDE_STANDARD_BOOL
 #define NK_INCLUDE_DEFAULT_FONT
 #include "nuklear.h"
 #include "nuklear_d3d9.h"

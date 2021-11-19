@@ -1,5 +1,7 @@
 [requires]
 plog/1.1.5
 nuklear/4.06.1
+jsonformoderncpp/3.7.0
+base64/0.4.0
 [generators]
 cmake

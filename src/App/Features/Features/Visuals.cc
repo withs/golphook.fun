@@ -4,9 +4,12 @@
 
 #include "Visuals.hh"
 
-void Visuals::onCreateMoove() {
+#include "Render/DrawQueue.hh"
 
-    this->_watermark();
+
+void Visuals::onCreateMoove() {
+    if ( Config::Get().currentCfg().watermark )
+        this->_watermark();
 
     if ( InterfacesCollection::i_engineClient->IsInGame() && InterfacesCollection::i_engineClient->IsConnected() ) {
 
@@ -21,7 +24,8 @@ void Visuals::onCreateMoove() {
                      ent->health() > 0 &&
                      ent->team() != this->localPlayer->team()
                 ) {
-                    this->_snapline(ent);
+                    if ( Config::Get().currentCfg().snaplines )
+                        this->_snapline(ent);
                 }
 
             }
@@ -31,10 +35,6 @@ void Visuals::onCreateMoove() {
     }
 
 }
-
-#include "Render/DrawQueue.hh"
-
-
 
 void Visuals::_snapline(Entity_t* ent) {
 
@@ -51,11 +51,11 @@ void Visuals::_snapline(Entity_t* ent) {
             return;
         }
 
-        Color_t bc {  };
-        bc.r = 255;
-        bc.g = 0;
-        bc.b = 0;
-        bc.a = 255;
+        Color_t bc { Config::Get().currentCfg().snaplinesCol.r,
+                     Config::Get().currentCfg().snaplinesCol.g,
+                     Config::Get().currentCfg().snaplinesCol.b,
+                     Config::Get().currentCfg().snaplinesCol.a
+        };
         std::shared_ptr<DrawLineb> aa;
         aa = std::shared_ptr<DrawLineb>{
                 new DrawLineb(
@@ -73,11 +73,11 @@ void Visuals::_snapline(Entity_t* ent) {
 }
 
 void Visuals::_watermark() {
-    Color_t bc {  };
-    bc.r = 128;
-    bc.g = 0;
-    bc.b = 128;
-    bc.a = 255;
+    Color_t bc { Config::Get().currentCfg().watermarkCol.r,
+                 Config::Get().currentCfg().watermarkCol.g,
+                 Config::Get().currentCfg().watermarkCol.b,
+                 Config::Get().currentCfg().watermarkCol.a
+    };
     std::shared_ptr<DrawTextb> aa;
     aa = std::shared_ptr<DrawTextb>{ new DrawTextb(Vec2<uint32_t>{static_cast<uint32_t>(4), static_cast<uint32_t>(4)}, "golphook.fun", bc) };
     DrawQueue::Get().push(aa);

@@ -18,6 +18,7 @@ void App::bootstrap(HMODULE withModuleHandle) {
 
     Interfaces::makeShared();
     NetvarsDumper::makeShared();
+    Config::makeShared();
     Menu::makeShared();
     Hooks::makeShared();
     DrawQueue::makeShared();

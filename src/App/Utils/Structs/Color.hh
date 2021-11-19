@@ -13,29 +13,32 @@
 
 struct Color_t {
     public:
+         int32_t r, g, b, a;
 
-         uint32_t r, g, b, a;
+         Color_t(): r(255), g(255), b(255), a(255) {}
 
-        Color_t() = default;
+        Color_t(int32_t r, int32_t g, int32_t b, int32_t a) {
+            this->r = r;
+            this->g = g;
+            this->b = b;
+            this->a = a;
+         }
 
-        Color_t(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
-            : r(r), g(g), b(b), a(a) {}
+         Color_t(float _r, float _g, float _b, float _a)
+                 : Color_t(
+                     static_cast<int>(_r * 255.0f),
+                     static_cast<int>(_g * 255.0f),
+                     static_cast<int>(_b * 255.0f),
+                     static_cast<int>(_a * 255.0f)) {}
 
-        Color_t(float r, float g, float b, float a) {
-            this->r = r * 255;
-            this->g = g * 255;
-            this->b = b * 255;
-            this->a = a * 255;
-        }
-
-         Color_t(nk_color withNkColor) {
+         explicit Color_t(nk_color withNkColor) {
              this->r = withNkColor.r;
              this->g = withNkColor.g;
              this->b = withNkColor.b;
              this->a = withNkColor.a;
          };
 
-         Color_t(nk_colorf withNkColorf) {
+         explicit Color_t(nk_colorf withNkColorf) {
              this->r = withNkColorf.r * 255;
              this->g = withNkColorf.g * 255;
              this->b = withNkColorf.b * 255;
@@ -54,10 +57,10 @@ struct Color_t {
 
              float _r, _g, _b, _a;
 
-             if ( (_r = this->r * 255.f) == 255 ) _r = 1.f;
-             if ( (_g = this->g * 255.f) == 255 ) _g = 1.f;
-             if ( (_b = this->b * 255.f) == 255 ) _b = 1.f;
-             if ( (_a = this->a * 255.f) == 255 ) _a = 1.f;
+             if ( (_r = this->r / 255.f) == 255 ) _r = 1.f;
+             if ( (_g = this->g / 255.f) == 255 ) _g = 1.f;
+             if ( (_b = this->b / 255.f) == 255 ) _b = 1.f;
+             if ( (_a = this->a / 255.f) == 255 ) _a = 1.f;
 
              return nk_colorf(_r, _g, _b, _a);
          }
@@ -65,3 +68,9 @@ struct Color_t {
 
 
 #endif //GOLPHOOK_FUN_COLOR_HH
+
+
+/*
+ * 255 145
+ * 1.0 0.56
+ */

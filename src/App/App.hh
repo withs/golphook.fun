@@ -11,6 +11,7 @@
 
 #include "Sdk/Interfaces.hh"
 #include "Hooks/Hooks.hh"
+#include "Config/Config.hh"
 #include "Render/Menu.hh"
 #include "Netvars/Netvars.hh"
 #include "Render/DrawQueue.hh"

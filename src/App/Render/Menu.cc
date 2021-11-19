@@ -11,6 +11,7 @@
 #define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
 #define NK_INCLUDE_FONT_BAKING
 #define NK_INCLUDE_DEFAULT_FONT
+#define NK_INCLUDE_STANDARD_BOOL
 #define NK_IMPLEMENTATION
 #define NK_D3D9_IMPLEMENTATION
 #include "nuklear.h"
@@ -119,11 +120,54 @@ void Menu::render() {
                     nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
 
                     nk_layout_row_push(this->_ctx, 0.75f);
-                    nk_checkbox_label(this->_ctx, "Snapline", &check);
+                    nk_checkbox_label(this->_ctx, "Snapline", &(Config::Get().currentCfg().snaplines));
 
-                    if ( check ) {
+                    if ( Config::Get().currentCfg().snaplines ) {
                         nk_layout_row_push(this->_ctx, 0.25f);
-                        nk_button_label(this->_ctx, "#FFBB");
+
+                        if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().snaplinesCol)), nk_vec2(300,400)) ) {
+                            nk_layout_row_dynamic(this->_ctx, 120, 1);
+
+                            nk_colorf bg = static_cast<nk_colorf>(Config::Get().currentCfg().snaplinesCol);
+
+                            bg = nk_color_picker(this->_ctx, bg, NK_RGBA);
+                            nk_layout_row_dynamic(this->_ctx, 25, 1);
+                            bg.r = nk_propertyf(this->_ctx, "#R:", 0, bg.r, 1.0f, 0.01f,0.005f);
+                            bg.g = nk_propertyf(this->_ctx, "#G:", 0, bg.g, 1.0f, 0.01f,0.005f);
+                            bg.b = nk_propertyf(this->_ctx, "#B:", 0, bg.b, 1.0f, 0.01f,0.005f);
+                            bg.a = nk_propertyf(this->_ctx, "#A:", 0, bg.a, 1.0f, 0.01f,0.005f);
+
+                            Config::Get().currentCfg().snaplinesCol = Color_t(bg);
+                            nk_combo_end(this->_ctx);
+                        }
+
+                    }
+                    nk_layout_row_end(this->_ctx);
+
+                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+
+                    nk_layout_row_push(this->_ctx, 0.75f);
+                    nk_checkbox_label(this->_ctx, "Watermark", &Config::Get().currentCfg().watermark);
+
+                    if ( Config::Get().currentCfg().watermark ) {
+                        nk_layout_row_push(this->_ctx, 0.25f);
+
+                        if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().watermarkCol)), nk_vec2(300,400)) ) {
+                            nk_layout_row_dynamic(this->_ctx, 120, 1);
+
+                            nk_colorf bg = static_cast<nk_colorf>(Config::Get().currentCfg().watermarkCol);
+
+                            bg = nk_color_picker(this->_ctx, bg, NK_RGBA);
+                            nk_layout_row_dynamic(this->_ctx, 25, 1);
+                            bg.r = nk_propertyf(this->_ctx, "#R:", 0, bg.r, 1.0f, 0.01f,0.005f);
+                            bg.g = nk_propertyf(this->_ctx, "#G:", 0, bg.g, 1.0f, 0.01f,0.005f);
+                            bg.b = nk_propertyf(this->_ctx, "#B:", 0, bg.b, 1.0f, 0.01f,0.005f);
+                            bg.a = nk_propertyf(this->_ctx, "#A:", 0, bg.a, 1.0f, 0.01f,0.005f);
+
+                            Config::Get().currentCfg().watermarkCol = Color_t(bg);
+                            nk_combo_end(this->_ctx);
+                        }
+
                     }
                     nk_layout_row_end(this->_ctx);
 
@@ -133,26 +177,6 @@ void Menu::render() {
 
                 if ( nk_group_begin(this->_ctx, "Visuals2", NK_WINDOW_BORDER) ) {
 
-                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
-
-                    nk_layout_row_push(this->_ctx, 0.75f);
-                    nk_checkbox_label(this->_ctx, "check", &check);
-
-                    nk_layout_row_push(this->_ctx, 0.25f);
-                    nk_button_label(this->_ctx, "#FFBB");
-
-                    nk_layout_row_end(this->_ctx);
-
-
-                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
-
-                    nk_layout_row_push(this->_ctx, 0.75f);
-                    nk_checkbox_label(this->_ctx, "check", &check);
-
-                    nk_layout_row_push(this->_ctx, 0.25f);
-                    nk_button_label(this->_ctx, "#FFBB");
-
-                    nk_layout_row_end(this->_ctx);
 
                     nk_group_end(this->_ctx);
                 }
@@ -169,36 +193,21 @@ void Menu::render() {
                 nk_layout_row_dynamic(this->_ctx, 270, 2);
 
                 if (nk_group_begin(this->_ctx, "Group_top", NK_WINDOW_BORDER)) {
-                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
-                    nk_layout_row_push(this->_ctx, 0.75f);
-                    nk_checkbox_label(this->_ctx, "check", &check);
-                    nk_layout_row_push(this->_ctx, 0.25f);
-                    nk_button_label(this->_ctx, "#FFBB");
-                    nk_layout_row_end(this->_ctx);
-
-                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
-                    nk_layout_row_push(this->_ctx, 0.75f);
-                    nk_checkbox_label(this->_ctx, "check", &check);
-                    nk_layout_row_push(this->_ctx, 0.25f);
-                    nk_button_label(this->_ctx, "#FFBB");
-                    nk_layout_row_end(this->_ctx);
 
                     nk_group_end(this->_ctx);
                 }
 
                 if (nk_group_begin(this->_ctx, "Group_top", NK_WINDOW_BORDER)) {
                     nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
-                    nk_layout_row_push(this->_ctx, 0.75f);
-                    nk_checkbox_label(this->_ctx, "check", &check);
-                    nk_layout_row_push(this->_ctx, 0.25f);
-                    nk_button_label(this->_ctx, "#FFBB");
-                    nk_layout_row_end(this->_ctx);
 
-                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
-                    nk_layout_row_push(this->_ctx, 0.75f);
-                    nk_checkbox_label(this->_ctx, "check", &check);
-                    nk_layout_row_push(this->_ctx, 0.25f);
-                    nk_button_label(this->_ctx, "#FFBB");
+                    nk_layout_row_push(this->_ctx, 0.50f);
+                    if ( nk_button_label(this->_ctx, "load") )
+                        Config::Get().loadConfigFromName("b");
+
+                    nk_layout_row_push(this->_ctx, 0.50f);
+                    if ( nk_button_label(this->_ctx, "save") )
+                        Config::Get().saveConfigToFile("b");
+
                     nk_layout_row_end(this->_ctx);
 
                     nk_group_end(this->_ctx);
