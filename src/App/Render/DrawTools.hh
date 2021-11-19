@@ -62,6 +62,7 @@ struct DrawTextb final: public DrawToolBase {
     Color_t _color { };
     Vec2<uint32_t> _pos { };
 
+
     DrawTextb(Vec2<uint32_t> toPos, std::string withText, Color_t andColor) {
         this->_pos = toPos;
         this->_color = andColor;

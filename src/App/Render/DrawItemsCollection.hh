@@ -19,6 +19,7 @@ class DrawItemsCollection: public SharedObject<DrawItemsCollection> {
          ~DrawItemsCollection();
 
          ID3DXFont* f_lucida;
+         ID3DXFont* f_lucidaMed;
          ID3DXLine* l_line;
 };
 

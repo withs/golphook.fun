@@ -15,6 +15,7 @@ class Visuals {
 
     private:
          void _snapline(Entity_t* ent);
+         void _watermark();
 
     public:
 

@@ -6,6 +6,8 @@
 
 void Visuals::onCreateMoove() {
 
+    this->_watermark();
+
     if ( InterfacesCollection::i_engineClient->IsInGame() && InterfacesCollection::i_engineClient->IsConnected() ) {
 
         for ( uint16_t pIndex = 0; pIndex <= 32; pIndex++ ) {
@@ -67,5 +69,17 @@ void Visuals::_snapline(Entity_t* ent) {
         DrawQueue::Get().push(aa);
 
     }
+
+}
+
+void Visuals::_watermark() {
+    Color_t bc {  };
+    bc.r = 128;
+    bc.g = 0;
+    bc.b = 128;
+    bc.a = 255;
+    std::shared_ptr<DrawTextb> aa;
+    aa = std::shared_ptr<DrawTextb>{ new DrawTextb(Vec2<uint32_t>{static_cast<uint32_t>(4), static_cast<uint32_t>(4)}, "golphook.fun", bc) };
+    DrawQueue::Get().push(aa);
 
 }
