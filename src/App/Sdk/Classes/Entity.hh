@@ -71,6 +71,10 @@ class Entity_t {
              return Mem::callVirtual<bool, 155>(this);
          }
 
+         Collideable_t* collideable(){
+             return Mem::callVirtual< Collideable_t*, 3 >(this);
+         }
+
          // Player related NETVARS
          auto health() {
              return Mem::getValOffset< int32_t >(NetvarsCollection::m_iHealth, this);
@@ -86,6 +90,18 @@ class Entity_t {
 
          Vec3 origin() {
              return Mem::getValOffset< Vec3 >(NetvarsCollection::m_vecOrigin, this);
+         }
+
+         Vec3 bone(int16_t boneIndex) {
+             Vec3 headPos;
+
+             uintptr_t boneMat = Mem::getValOffset<uintptr_t>(0x26A8, this);
+
+             headPos.x = *reinterpret_cast<float*>(boneMat + 0x30 * boneIndex + 0x0C);
+             headPos.y = *reinterpret_cast<float*>(boneMat + 0x30 * boneIndex + 0x1C);
+             headPos.z = *reinterpret_cast<float*>(boneMat + 0x30 * boneIndex+ 0x2C);
+
+             return headPos;
          }
 
 };
