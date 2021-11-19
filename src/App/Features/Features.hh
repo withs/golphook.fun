@@ -5,9 +5,22 @@
 #ifndef GOLPHOOK_FUN_FEATURES_HH
 #define GOLPHOOK_FUN_FEATURES_HH
 
+#include "CommonIncludes.hh"
 
-class Features {
+#include "Sdk/Interfaces/Math/VMatrix.hpp"
 
+#include "Utils/SharedObject.hh"
+
+#include "Features/Visuals.hh"
+#include "Features/Movements.hh"
+#include "Features//Others.hh"
+#include "Features/Engine.hh"
+
+class Features: public SharedObject<Features> {
+    public:
+         std::unique_ptr<Visuals> visuals;
+
+         Features();
 };
 
 

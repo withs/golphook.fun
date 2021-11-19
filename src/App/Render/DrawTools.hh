@@ -37,6 +37,24 @@ struct DrawRect final: public DrawToolBase {
     inline ~DrawRect() = default;;
 };
 
+struct DrawLineb final: public DrawToolBase {
+
+    Color_t _color { };
+    Vec2<uint32_t> _pos { };
+    Vec2<uint32_t> _pos2 { };
+    float _thickness;
+
+    DrawLineb(Vec2<uint32_t> fromPos, Vec2<uint32_t> toPos, float andThickness, Color_t andColor) {
+        this->_pos = fromPos;
+        this->_pos2 = toPos;
+        this->_color = andColor;
+        this->_thickness = andThickness;
+    };
+    bool draw() override;
+
+    constexpr DrawLineb() = default;
+    inline ~DrawLineb() = default;;
+};
 
 struct DrawTextb final: public DrawToolBase {
 

@@ -17,10 +17,11 @@ bool __stdcall EndScene::hooked(LPDIRECT3DDEVICE9 withDevice) {
         Menu::Get().bootstrap();
     }
 
-
-    int32_t queueSize = DrawQueue::Get().len();
-    for ( int32_t i = 0; i < queueSize ; i++ ) {
-        DrawQueue::Get()[i]->draw();
+    if ( App::Get().ready ) {
+        int32_t queueSize = DrawQueue::Get().len();
+        for ( int32_t i = 0; i < queueSize ; i++ ) {
+            DrawQueue::Get()[i]->draw();
+        }
     }
 
     if ( Menu::Get().isMenuOpened ) {
