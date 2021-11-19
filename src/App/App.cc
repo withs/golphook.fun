@@ -21,8 +21,7 @@ void App::bootstrap(HMODULE withModuleHandle) {
     Menu::makeShared();
     Hooks::makeShared();
     DrawQueue::makeShared();
-
-
+    Features::makeShared();
 
     App::Get().run();
 
@@ -51,6 +50,14 @@ void App::run() {
     Beep( 670, 200 );
     Beep( 730, 150 );
     PLOG_INFO << "hello golphook.fun";
+
+    Features::Get().visuals->localPlayer = InterfacesCollection::i_entityList->getClientEntity(
+            InterfacesCollection::i_engineClient->GetLocalPlayer()
+    );
+
+    this->ready = true;
+
+    Menu::Get().isMenuOpened = true;
 
     while ( true ) {
 

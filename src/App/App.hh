@@ -14,6 +14,7 @@
 #include "Render/Menu.hh"
 #include "Netvars/Netvars.hh"
 #include "Render/DrawQueue.hh"
+#include "Features/Features.hh"
 
 struct AppIo {
     int32_t windHeight = 0;
@@ -24,6 +25,8 @@ struct AppIo {
 
 class App: public SharedObject<App> {
     public:
+
+         bool ready = false;
 
          static void bootstrap(HMODULE withModuleHandle);
          void run();
