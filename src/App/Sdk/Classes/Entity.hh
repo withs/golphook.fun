@@ -95,7 +95,7 @@ class Entity_t {
          Vec3 bone(int16_t boneIndex) {
              Vec3 headPos;
 
-             uintptr_t boneMat = Mem::getValOffset<uintptr_t>(0x26A8, this);
+             uintptr_t boneMat = Mem::getValOffset<uintptr_t>(NetvarsCollection::m_dwBoneMatrix, this);
 
              headPos.x = *reinterpret_cast<float*>(boneMat + 0x30 * boneIndex + 0x0C);
              headPos.y = *reinterpret_cast<float*>(boneMat + 0x30 * boneIndex + 0x1C);

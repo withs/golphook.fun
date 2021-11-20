@@ -41,6 +41,7 @@ class NetvarsCollection {
          static inline uintptr_t m_flDefuseCountDown;
 
          static inline uintptr_t m_vecOrigin;
+         static inline uintptr_t m_dwBoneMatrix;
 };
 
 #endif //GOLPHOOK_FUN_NETVARSCOLLECTINO_HH
