@@ -42,6 +42,7 @@ class NetvarsCollection {
 
          static inline uintptr_t m_vecOrigin;
          static inline uintptr_t m_dwBoneMatrix;
+         static inline uintptr_t m_vecViewOffset;
 };
 
 #endif //GOLPHOOK_FUN_NETVARSCOLLECTINO_HH

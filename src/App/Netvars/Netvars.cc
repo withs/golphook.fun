@@ -43,6 +43,7 @@ NetvarsDumper::NetvarsDumper() {
     NetvarsCollection::m_iTeamNum = this->getNetVarOffset("DT_BaseEntity", "m_iTeamNum");
     NetvarsCollection::m_vecOrigin = this->getNetVarOffset("DT_BasePlayer", "m_vecOrigin");
     NetvarsCollection::m_dwBoneMatrix = this->getNetVarOffset("DT_BaseAnimating", "m_nForceBone") + 28;
+    NetvarsCollection::m_vecViewOffset = this->getNetVarOffset("DT_BasePlayer", "m_vecViewOffset[0]");
 };
 
 
