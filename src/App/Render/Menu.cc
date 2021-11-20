@@ -4,6 +4,7 @@
 
 #include "Menu.hh"
 
+#define NK_INCLUDE_STANDARD_BOOL
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_STANDARD_VARARGS
@@ -11,7 +12,6 @@
 #define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
 #define NK_INCLUDE_FONT_BAKING
 #define NK_INCLUDE_DEFAULT_FONT
-#define NK_INCLUDE_STANDARD_BOOL
 #define NK_IMPLEMENTATION
 #define NK_D3D9_IMPLEMENTATION
 #include "nuklear.h"
@@ -45,30 +45,30 @@ void Menu::render() {
         nk_layout_row_dynamic(this->_ctx, 20, 5);
         if ( nk_selectable_label(this->_ctx, "Visuals", NK_TEXT_CENTERED, &this->_tabsHighlight[0]) ) {
             this->_currentTab = MenuTabs::VISUALS;
-            for ( auto& bo: this->_tabsHighlight ) bo = 0;
-            this->_tabsHighlight[0] = 1;
+            for ( auto& bo: this->_tabsHighlight ) bo = false;
+            this->_tabsHighlight[0] = true;
         }
         if ( nk_selectable_label(this->_ctx, "Engine", NK_TEXT_CENTERED, &this->_tabsHighlight[1]) ) {
             this->_currentTab = MenuTabs::ENGINE;
-            for ( auto& bo: this->_tabsHighlight ) bo = 0;
-            this->_tabsHighlight[1] = 1;
+            for ( auto& bo: this->_tabsHighlight ) bo = false;
+            this->_tabsHighlight[1] = true;
         }
         if ( nk_selectable_label(this->_ctx, "VHV", NK_TEXT_CENTERED, &this->_tabsHighlight[2]) ) {
             this->_currentTab = MenuTabs::VHV;
-            for ( auto& bo: this->_tabsHighlight ) bo = 0;
-            this->_tabsHighlight[2] = 1;
+            for ( auto& bo: this->_tabsHighlight ) bo = false;
+            this->_tabsHighlight[2] = true;
         }
 
         if ( nk_selectable_label(this->_ctx, "Skins", NK_TEXT_CENTERED, &this->_tabsHighlight[3]) ) {
             this->_currentTab = MenuTabs::SKINS;
-            for ( auto& bo: this->_tabsHighlight ) bo = 0;
-            this->_tabsHighlight[3] = 1;
+            for ( auto& bo: this->_tabsHighlight ) bo = false;
+            this->_tabsHighlight[3] = true;
         }
 
         if ( nk_selectable_label(this->_ctx, "Others", NK_TEXT_CENTERED, &this->_tabsHighlight[4]) ) {
             this->_currentTab = MenuTabs::OTHERS;
-            for ( auto& bo: this->_tabsHighlight ) bo = 0;
-            this->_tabsHighlight[4] = 1;
+            for ( auto& bo: this->_tabsHighlight ) bo = false;
+            this->_tabsHighlight[4] = true;
         }
 
         switch ( this->_currentTab ) {
@@ -80,7 +80,7 @@ void Menu::render() {
 
                     nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
 
-                    nk_layout_row_push(this->_ctx, 0.75f);
+                    nk_layout_row_push(this->_ctx, 0.50f);
                     nk_checkbox_label(this->_ctx, "Boxes", &Config::Get().currentCfg().boxe);
 
                     if ( Config::Get().currentCfg().boxe ) {
@@ -100,15 +100,32 @@ void Menu::render() {
                             Config::Get().currentCfg().boxeCol = Color_t(bg);
                             nk_combo_end(this->_ctx);
                         }
+
+                        nk_layout_row_push(this->_ctx, 0.25f);
+                        if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().boxeColOcl)), nk_vec2(300,400)) ) {
+                            nk_layout_row_dynamic(this->_ctx, 120, 1);
+
+                            nk_colorf bg = static_cast<nk_colorf>(Config::Get().currentCfg().boxeColOcl);
+
+                            bg = nk_color_picker(this->_ctx, bg, NK_RGBA);
+                            nk_layout_row_dynamic(this->_ctx, 25, 1);
+                            bg.r = nk_propertyf(this->_ctx, "#R:", 0, bg.r, 1.0f, 0.01f,0.005f);
+                            bg.g = nk_propertyf(this->_ctx, "#G:", 0, bg.g, 1.0f, 0.01f,0.005f);
+                            bg.b = nk_propertyf(this->_ctx, "#B:", 0, bg.b, 1.0f, 0.01f,0.005f);
+                            bg.a = nk_propertyf(this->_ctx, "#A:", 0, bg.a, 1.0f, 0.01f,0.005f);
+
+                            Config::Get().currentCfg().boxeColOcl = Color_t(bg);
+                            nk_combo_end(this->_ctx);
+                        }
                     }
+
                     nk_layout_row_end(this->_ctx);
 
                     if ( check ) {
                         nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
 
                         nk_layout_row_push(this->_ctx, 1.f);
-                        nk_checkbox_label(this->_ctx, "Names", &check);
-
+                        nk_checkbox_label(this->_ctx, "Health bar", &check);
                         nk_layout_row_end(this->_ctx);
 
                         nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
@@ -133,11 +150,28 @@ void Menu::render() {
 
                     nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
 
-                    nk_layout_row_push(this->_ctx, 0.75f);
+                    nk_layout_row_push(this->_ctx, 0.50f);
                     nk_checkbox_label(this->_ctx, "Snapline", &(Config::Get().currentCfg().snaplines));
 
                     if ( Config::Get().currentCfg().snaplines ) {
                         nk_layout_row_push(this->_ctx, 0.25f);
+
+                        nk_layout_row_push(this->_ctx, 0.25f);
+                        if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().snaplinesColOcl)), nk_vec2(300,400)) ) {
+                            nk_layout_row_dynamic(this->_ctx, 120, 1);
+
+                            nk_colorf bg = static_cast<nk_colorf>(Config::Get().currentCfg().snaplinesColOcl);
+
+                            bg = nk_color_picker(this->_ctx, bg, NK_RGBA);
+                            nk_layout_row_dynamic(this->_ctx, 25, 1);
+                            bg.r = nk_propertyf(this->_ctx, "#R:", 0, bg.r, 1.0f, 0.01f,0.005f);
+                            bg.g = nk_propertyf(this->_ctx, "#G:", 0, bg.g, 1.0f, 0.01f,0.005f);
+                            bg.b = nk_propertyf(this->_ctx, "#B:", 0, bg.b, 1.0f, 0.01f,0.005f);
+                            bg.a = nk_propertyf(this->_ctx, "#A:", 0, bg.a, 1.0f, 0.01f,0.005f);
+
+                            Config::Get().currentCfg().snaplinesColOcl = Color_t(bg);
+                            nk_combo_end(this->_ctx);
+                        }
 
                         if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().snaplinesCol)), nk_vec2(300,400)) ) {
                             nk_layout_row_dynamic(this->_ctx, 120, 1);

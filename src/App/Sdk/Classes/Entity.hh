@@ -9,7 +9,7 @@
 #include "Utils/Memory/Mem.hh"
 
 #include "Sdk/Interfaces/client_class.h"
-
+#include "Sdk/Interfaces/Misc/BaseHandle.hh"
 #include "Netvars/NetvarsCollection.hh"
 
 class c_econ_item_view;
@@ -71,8 +71,15 @@ class Entity_t {
              return Mem::callVirtual<bool, 155>(this);
          }
 
+         CBaseHandle handle() {
+             return Mem::callVirtual< CBaseHandle   &, 2 >(this);
+         }
+
          Collideable_t* collideable(){
              return Mem::callVirtual< Collideable_t*, 3 >(this);
+         }
+         ClientClass* GetClientClass() {
+             return Mem::callVirtual< ClientClass*, 2 >(networkable());
          }
 
          // Player related NETVARS
@@ -103,6 +110,11 @@ class Entity_t {
 
              return headPos;
          }
+
+         Vec3 getEyePos() {
+             return Mem::getValOffset<Vec3>(NetvarsCollection::m_vecOrigin + NetvarsCollection::m_vecViewOffset, this);
+         }
+
 
 };
 

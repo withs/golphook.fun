@@ -18,6 +18,8 @@ class Visuals {
          void _boxe(Entity_t* ent);
          void _watermark();
 
+         bool _canSeePlayer(int32_t hitbox, Entity_t* fromPlayer, Entity_t* ToPlayer);
+
     public:
 
          Entity_t* localPlayer;

@@ -56,11 +56,18 @@ void Visuals::_snapline(Entity_t* ent) {
             return;
         }
 
-        Color_t bc { Config::Get().currentCfg().snaplinesCol.r,
-                     Config::Get().currentCfg().snaplinesCol.g,
-                     Config::Get().currentCfg().snaplinesCol.b,
-                     Config::Get().currentCfg().snaplinesCol.a
-        };
+        Color_t bc = Config::Get().currentCfg().snaplinesCol;
+
+
+        std::vector<int32_t> boneToBeVisible = { 8, 42, 12, 79, 72, 71, 78 };
+
+        for ( auto& bone: boneToBeVisible) {
+            if ( this->_canSeePlayer(bone, this->localPlayer, ent) ) {
+                bc = Config::Get().currentCfg().snaplinesColOcl;
+                break;
+            }
+        }
+
         std::shared_ptr<DrawLineb> aa;
         aa = std::shared_ptr<DrawLineb>{
                 new DrawLineb(
@@ -94,17 +101,18 @@ void Visuals::_boxe(Entity_t *ent) {
         headPos.z += 13;
 
         if ( Math::worldToScreen(headPos, screenHeadOut) ) {
-            /*
-            int32_t height = 0;
-            if ( screenHeadOut.y <= 0 ) {
-                height = App::Get().io.windHeight - (App::Get().io.windHeight - screenOut.y)
-            }*/
 
-            Color_t bc { Config::Get().currentCfg().boxeCol.r,
-                         Config::Get().currentCfg().boxeCol.g,
-                         Config::Get().currentCfg().boxeCol.b,
-                         Config::Get().currentCfg().boxeCol.a
-            };
+            Color_t bc = Config::Get().currentCfg().boxeColOcl;
+
+            std::vector<int32_t> boneToBeVisible = { 8, 42, 12, 79, 72, 71, 78 };
+
+            for ( auto& bone: boneToBeVisible) {
+                if ( this->_canSeePlayer(bone, this->localPlayer, ent) ) {
+                    bc = Config::Get().currentCfg().boxeCol;
+                    break;
+                }
+            }
+
             std::shared_ptr<DrawRectb> aa;
             aa = std::shared_ptr<DrawRectb>{
                     new DrawRectb(
@@ -120,13 +128,27 @@ void Visuals::_boxe(Entity_t *ent) {
 }
 
 void Visuals::_watermark() {
-    Color_t bc { Config::Get().currentCfg().watermarkCol.r,
-                 Config::Get().currentCfg().watermarkCol.g,
-                 Config::Get().currentCfg().watermarkCol.b,
-                 Config::Get().currentCfg().watermarkCol.a
-    };
+    Color_t bc = Config::Get().currentCfg().watermarkCol;
     std::shared_ptr<DrawTextb> aa;
     aa = std::shared_ptr<DrawTextb>{ new DrawTextb(Vec2<uint32_t>{static_cast<uint32_t>(4), static_cast<uint32_t>(4)}, "golphook.fun", bc) };
     DrawQueue::Get().push(aa);
 
+}
+
+bool Visuals::_canSeePlayer(int32_t hitbox, Entity_t *fromPlayer, Entity_t *ToPlayer) {
+    CGameTrace tr;
+    Ray_t ray;
+    CTraceFilter filter;
+    filter.pSkip = fromPlayer;
+
+    Vec3 endpos = ToPlayer->bone(hitbox);
+    Vector vEndPos { endpos.x, endpos.y, endpos.z };
+
+    Vec3 eyePos = fromPlayer->bone(8);
+    Vector vEyePos { eyePos.x, eyePos.y, eyePos.z };
+
+    ray.Init(vEyePos, vEndPos);
+    InterfacesCollection::i_engineTrace->TraceRay(ray, MASK_SHOT | CONTENTS_GRATE, &filter, &tr);
+
+    return tr.fraction > 0.97f;
 }

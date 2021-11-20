@@ -51,11 +51,22 @@ void Config::loadConfigFromFile(std::filesystem::path fromPath) {
         fromFileConfig.snaplinesCol.b  = inputJson["cfg"]["snaplinesCol"]["b"];
         fromFileConfig.snaplinesCol.a  = inputJson["cfg"]["snaplinesCol"]["a"];
 
+        fromFileConfig.snaplinesColOcl.r = inputJson["cfg"]["snaplinesColOcl"]["r"];
+        fromFileConfig.snaplinesColOcl.g  = inputJson["cfg"]["snaplinesColOcl"]["g"];
+        fromFileConfig.snaplinesColOcl.b  = inputJson["cfg"]["snaplinesColOcl"]["b"];
+        fromFileConfig.snaplinesColOcl.a  = inputJson["cfg"]["snaplinesColOcl"]["a"];
+
+
         fromFileConfig.boxe = inputJson["cfg"]["boxe"];
         fromFileConfig.boxeCol.r = inputJson["cfg"]["boxeCol"]["r"];
         fromFileConfig.boxeCol.g  = inputJson["cfg"]["boxeCol"]["g"];
         fromFileConfig.boxeCol.b  = inputJson["cfg"]["boxeCol"]["b"];
         fromFileConfig.boxeCol.a  = inputJson["cfg"]["boxeCol"]["a"];
+
+        fromFileConfig.boxeColOcl.r = inputJson["cfg"]["boxeColOcl"]["r"];
+        fromFileConfig.boxeColOcl.g  = inputJson["cfg"]["boxeColOcl"]["g"];
+        fromFileConfig.boxeColOcl.b  = inputJson["cfg"]["boxeColOcl"]["b"];
+        fromFileConfig.boxeColOcl.a  = inputJson["cfg"]["boxeColOcl"]["a"];
 
         fromFileConfig.watermark = inputJson["cfg"]["watermark"];
         fromFileConfig.watermarkCol.r = inputJson["cfg"]["watermarkCol"]["r"];
@@ -102,19 +113,31 @@ void Config::saveConfigToFile(std::string withName) {
                     {"b", this->currentCfg().snaplinesCol.b},
                     {"a", this->currentCfg().snaplinesCol.a}
             }},
+            {"snaplinesColOcl", {
+                     {"r", this->currentCfg().snaplinesColOcl.r},
+                     {"g", this->currentCfg().snaplinesColOcl.g},
+                     {"b", this->currentCfg().snaplinesColOcl.b},
+                     {"a", this->currentCfg().snaplinesColOcl.a}
+            }},
             {"boxe", this->currentCfg().boxe},
             {"boxeCol", {
-                                  {"r", this->currentCfg().boxeCol.r},
-                                  {"g", this->currentCfg().boxeCol.g},
-                                  {"b", this->currentCfg().boxeCol.b},
-                                  {"a", this->currentCfg().boxeCol.a}
-                          }},
+                      {"r", this->currentCfg().boxeCol.r},
+                      {"g", this->currentCfg().boxeCol.g},
+                      {"b", this->currentCfg().boxeCol.b},
+                      {"a", this->currentCfg().boxeCol.a}
+              }},
+            {"boxeColOcl", {
+                    {"r", this->currentCfg().boxeColOcl.r},
+                    {"g", this->currentCfg().boxeColOcl.g},
+                    {"b", this->currentCfg().boxeColOcl.b},
+                    {"a", this->currentCfg().boxeColOcl.a}
+            }},
             {"watermark", this->currentCfg().watermark},
             {"watermarkCol", {
-                        {"r", this->currentCfg().watermarkCol.r},
-                        {"g", this->currentCfg().watermarkCol.g},
-                        {"b", this->currentCfg().watermarkCol.b},
-                        {"a", this->currentCfg().watermarkCol.a}
+                {"r", this->currentCfg().watermarkCol.r},
+                {"g", this->currentCfg().watermarkCol.g},
+                {"b", this->currentCfg().watermarkCol.b},
+                {"a", this->currentCfg().watermarkCol.a}
             }}
     };
     std::string outputJsonString = outputJson.dump();

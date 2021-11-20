@@ -27,12 +27,16 @@ struct Config_t {
     // visuals
     bool snaplines = false;
     Color_t snaplinesCol = Color_t{ 255, 255, 255, 255 };
+    Color_t snaplinesColOcl = Color_t{ 255, 255, 255, 255 };
 
     bool boxe = false;
     Color_t boxeCol = Color_t{ 255, 255, 255, 255 };
+    Color_t boxeColOcl = Color_t{ 255, 255, 255, 255 };
 
     bool watermark = false;
     Color_t watermarkCol = Color_t{ 255, 255, 255, 255 };
+
+    int inslider = 0;
 
 };
 
