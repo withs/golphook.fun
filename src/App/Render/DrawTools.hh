@@ -25,10 +25,10 @@ struct DrawToolBase {
 
 struct DrawRectb final: public DrawToolBase {
     Color_t _color { };
-    Vec2<uint32_t> _pos { };
+    Vec2<int32_t> _pos { };
     int16_t _height;
 
-    DrawRectb(Vec2<uint32_t> toPos, int16_t withHeight, Color_t andColor) {
+    DrawRectb(Vec2<int32_t> toPos, int16_t withHeight, Color_t andColor) {
         this->_pos = toPos;
         this->_color = andColor;
         this->_height = withHeight;

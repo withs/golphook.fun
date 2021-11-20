@@ -84,8 +84,7 @@ void Visuals::_boxe(Entity_t *ent) {
 
         if ( screenOut.x <= 0 ||
              screenOut.y <= 0 ||
-             screenOut.x >= App::Get().io.windWidth ||
-             screenOut.y >= App::Get().io.windHeight
+             screenOut.x >= App::Get().io.windWidth
                 ) {
             return;
         }
@@ -95,6 +94,11 @@ void Visuals::_boxe(Entity_t *ent) {
         headPos.z += 13;
 
         if ( Math::worldToScreen(headPos, screenHeadOut) ) {
+            /*
+            int32_t height = 0;
+            if ( screenHeadOut.y <= 0 ) {
+                height = App::Get().io.windHeight - (App::Get().io.windHeight - screenOut.y)
+            }*/
 
             Color_t bc { Config::Get().currentCfg().boxeCol.r,
                          Config::Get().currentCfg().boxeCol.g,
@@ -104,7 +108,7 @@ void Visuals::_boxe(Entity_t *ent) {
             std::shared_ptr<DrawRectb> aa;
             aa = std::shared_ptr<DrawRectb>{
                     new DrawRectb(
-                                {static_cast<uint32_t>(screenOut.x), static_cast<uint32_t>(screenOut.y)},
+                                {static_cast<int32_t>(screenOut.x), static_cast<int32_t>(screenOut.y)},
                                 screenHeadOut.y,
                                 bc
                             )
