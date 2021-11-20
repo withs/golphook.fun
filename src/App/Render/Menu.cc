@@ -42,6 +42,9 @@ void Menu::render() {
 
     if( nk_begin(this->_ctx, "Golphook v0.4.3-alpha", nk_rect(100, 100, 670, 274), NK_WINDOW_BORDER | NK_WINDOW_MOVABLE | NK_WINDOW_NO_SCROLLBAR) ) {
 
+        const struct nk_input *in = &this->_ctx->input;
+        struct nk_rect bounds;
+
         nk_layout_row_dynamic(this->_ctx, 20, 5);
         if ( nk_selectable_label(this->_ctx, "Visuals", NK_TEXT_CENTERED, &this->_tabsHighlight[0]) ) {
             this->_currentTab = MenuTabs::VISUALS;
@@ -85,6 +88,8 @@ void Menu::render() {
 
                     if ( Config::Get().currentCfg().boxe ) {
                         nk_layout_row_push(this->_ctx, 0.25f);
+                        bounds = nk_widget_bounds(this->_ctx);
+
                         if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().boxeCol)), nk_vec2(300,400)) ) {
                             nk_layout_row_dynamic(this->_ctx, 120, 1);
 
@@ -101,7 +106,12 @@ void Menu::render() {
                             nk_combo_end(this->_ctx);
                         }
 
+                        if (nk_input_is_mouse_hovering_rect(in, bounds))
+                            nk_tooltip(this->_ctx, " Visible color");
+
                         nk_layout_row_push(this->_ctx, 0.25f);
+                        bounds = nk_widget_bounds(this->_ctx);
+
                         if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().boxeColOcl)), nk_vec2(300,400)) ) {
                             nk_layout_row_dynamic(this->_ctx, 120, 1);
 
@@ -117,6 +127,9 @@ void Menu::render() {
                             Config::Get().currentCfg().boxeColOcl = Color_t(bg);
                             nk_combo_end(this->_ctx);
                         }
+
+                        if (nk_input_is_mouse_hovering_rect(in, bounds))
+                            nk_tooltip(this->_ctx, " Occluded color");
                     }
 
                     nk_layout_row_end(this->_ctx);
@@ -154,9 +167,10 @@ void Menu::render() {
                     nk_checkbox_label(this->_ctx, "Snapline", &(Config::Get().currentCfg().snaplines));
 
                     if ( Config::Get().currentCfg().snaplines ) {
-                        nk_layout_row_push(this->_ctx, 0.25f);
 
                         nk_layout_row_push(this->_ctx, 0.25f);
+                        bounds = nk_widget_bounds(this->_ctx);
+
                         if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().snaplinesColOcl)), nk_vec2(300,400)) ) {
                             nk_layout_row_dynamic(this->_ctx, 120, 1);
 
@@ -173,6 +187,11 @@ void Menu::render() {
                             nk_combo_end(this->_ctx);
                         }
 
+                        if (nk_input_is_mouse_hovering_rect(in, bounds))
+                            nk_tooltip(this->_ctx, " Visible color");
+
+                        nk_layout_row_push(this->_ctx, 0.25f);
+                        bounds = nk_widget_bounds(this->_ctx);
                         if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().snaplinesCol)), nk_vec2(300,400)) ) {
                             nk_layout_row_dynamic(this->_ctx, 120, 1);
 
@@ -188,6 +207,9 @@ void Menu::render() {
                             Config::Get().currentCfg().snaplinesCol = Color_t(bg);
                             nk_combo_end(this->_ctx);
                         }
+
+                        if (nk_input_is_mouse_hovering_rect(in, bounds))
+                            nk_tooltip(this->_ctx, " Occluded color");
 
                     }
                     nk_layout_row_end(this->_ctx);
