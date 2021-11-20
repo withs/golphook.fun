@@ -5,16 +5,14 @@
 #ifndef GOLPHOOK_FUN_INTERFACESCOLLECTION_HH
 #define GOLPHOOK_FUN_INTERFACESCOLLECTION_HH
 
-
 #include "Interfaces/IVDebugOverlay.h"
 #include "Interfaces/cdll_int.h"
 #include "Interfaces/ICvar.h"
 #include "Interfaces/IInputSystem.h"
 #include "Interfaces/ISurface.h"
 #include "Interfaces/IEntityList.h"
-
 #include "Interfaces/client_class.h"
-
+#include "Interfaces/IEngineTrace.hh"
 
 class InterfacesCollection {
     public:
@@ -25,6 +23,7 @@ class InterfacesCollection {
          static inline ICvar* i_console;
          static inline IInputSystem* i_inputSystem;
          static inline ISurface* i_surface;
+         static inline IEngineTrace* i_engineTrace;
 };
 
 
