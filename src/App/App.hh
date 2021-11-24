@@ -15,6 +15,7 @@
 #include "Render/Menu.hh"
 #include "Netvars/Netvars.hh"
 #include "Render/DrawQueue.hh"
+#include "Render/Indicators.hh"
 #include "Features/Features.hh"
 
 struct AppIo {
@@ -28,10 +29,13 @@ class App: public SharedObject<App> {
     public:
 
          bool ready = false;
+         std::vector<Entity_t*> entityList = {  };
+         Entity_t* localPlayer;
 
          static void bootstrap(HMODULE withModuleHandle);
          void run();
          void caca();
+         void collectEntities();
 
          AppIo io { };
 

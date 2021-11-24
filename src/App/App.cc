@@ -25,6 +25,7 @@ void App::bootstrap(HMODULE withModuleHandle) {
     Menu::makeShared();
     Hooks::makeShared();
     DrawQueue::makeShared();
+    //Indicators::makeShared();
     Features::makeShared();
 
     App::Get().run();
@@ -55,7 +56,7 @@ void App::caca() {
 
 void App::run() {
 
-    Features::Get().visuals->localPlayer = InterfacesCollection::i_entityList->getClientEntity(
+    this->localPlayer = InterfacesCollection::i_entityList->getClientEntity(
             InterfacesCollection::i_engineClient->GetLocalPlayer()
     );
 
@@ -98,6 +99,34 @@ void App::run() {
         if ( GetAsyncKeyState(VK_END) & 1 ) {
             break;
         }
+    }
+
+}
+
+void App::collectEntities() {
+
+    if ( InterfacesCollection::i_engineClient->IsInGame() && InterfacesCollection::i_engineClient->IsConnected() ) {
+
+        for ( uint16_t pIndex = 0; pIndex <= 32; pIndex++ ) {
+
+            Entity_t* ent;
+
+            if ( (ent = InterfacesCollection::i_entityList->getClientEntity(pIndex)) ) {
+
+                if ( ent != this->localPlayer &&
+                     ent->dormant() == 0 &&
+                     ent->health() > 0 &&
+                     ent->team() != this->localPlayer->team()
+                        ) {
+
+                    this->entityList.push_back(ent);
+
+                }
+
+            }
+
+        }
+
     }
 
 }
