@@ -74,6 +74,30 @@ void Config::loadConfigFromFile(std::filesystem::path fromPath) {
         fromFileConfig.watermarkCol.b  = inputJson["cfg"]["watermarkCol"]["b"];
         fromFileConfig.watermarkCol.a  = inputJson["cfg"]["watermarkCol"]["a"];
 
+        fromFileConfig.indicators = inputJson["cfg"]["indicators"];
+        fromFileConfig.indicatorsCol.r = inputJson["cfg"]["indicatorsCol"]["r"];
+        fromFileConfig.indicatorsCol.g  = inputJson["cfg"]["indicatorsCol"]["g"];
+        fromFileConfig.indicatorsCol.b  = inputJson["cfg"]["indicatorsCol"]["b"];
+        fromFileConfig.indicatorsCol.a  = inputJson["cfg"]["indicatorsCol"]["a"];
+
+        fromFileConfig.viewmodel = inputJson["cfg"]["viewmodel"];
+        fromFileConfig.viewmodelOff.x = inputJson["cfg"]["viewmodelOffs"]["x"];
+        fromFileConfig.viewmodelOff.y = inputJson["cfg"]["viewmodelOffs"]["y"];
+        fromFileConfig.viewmodelOff.z = inputJson["cfg"]["viewmodelOffs"]["z"];
+        fromFileConfig.viewmodelAngOff.x = inputJson["cfg"]["viewmodelOffs"]["yaw"];
+        fromFileConfig.viewmodelAngOff.y = inputJson["cfg"]["viewmodelOffs"]["pitch"];
+        fromFileConfig.viewmodelAngOff.z = inputJson["cfg"]["viewmodelOffs"]["roll"];
+        fromFileConfig.viewmodelFov = inputJson["cfg"]["viewmodelOffs"]["viewmodelFov"];
+        fromFileConfig.fov = inputJson["cfg"]["viewmodelOffs"]["fov"];
+
+        fromFileConfig.bop = inputJson["cfg"]["bop"];
+
+        fromFileConfig.engine = inputJson["cfg"]["engine"];
+        fromFileConfig.engineFov = inputJson["cfg"]["engineSettings"]["fov"];
+        //fromFileConfig.engineBones = inputJson["cfg"]["engineSettings"]["bones"];
+        fromFileConfig.enginePrefBone = inputJson["cfg"]["engineSettings"]["prefBones"];
+        fromFileConfig.engineOnKeyForceBone = inputJson["cfg"]["engineSettings"]["onKeyForceBone"];
+
         this->_configList.push_back(fromFileConfig);
     } catch (std::exception& e) {
         PLOGD << e.what();
@@ -106,39 +130,66 @@ void Config::saveConfigToFile(std::string withName) {
     nlohmann::json outputJson;
     outputJson["name"] = withName;
     outputJson["cfg"] = {
-            {"snaplines", this->currentCfg().snaplines},
-            {"snaplinesCol", {
-                    {"r", this->currentCfg().snaplinesCol.r},
-                    {"g", this->currentCfg().snaplinesCol.g},
-                    {"b", this->currentCfg().snaplinesCol.b},
-                    {"a", this->currentCfg().snaplinesCol.a}
-            }},
-            {"snaplinesColOcl", {
-                     {"r", this->currentCfg().snaplinesColOcl.r},
-                     {"g", this->currentCfg().snaplinesColOcl.g},
-                     {"b", this->currentCfg().snaplinesColOcl.b},
-                     {"a", this->currentCfg().snaplinesColOcl.a}
-            }},
-            {"boxe", this->currentCfg().boxe},
-            {"boxeCol", {
-                      {"r", this->currentCfg().boxeCol.r},
-                      {"g", this->currentCfg().boxeCol.g},
-                      {"b", this->currentCfg().boxeCol.b},
-                      {"a", this->currentCfg().boxeCol.a}
-              }},
-            {"boxeColOcl", {
-                    {"r", this->currentCfg().boxeColOcl.r},
-                    {"g", this->currentCfg().boxeColOcl.g},
-                    {"b", this->currentCfg().boxeColOcl.b},
-                    {"a", this->currentCfg().boxeColOcl.a}
-            }},
-            {"watermark", this->currentCfg().watermark},
-            {"watermarkCol", {
-                {"r", this->currentCfg().watermarkCol.r},
-                {"g", this->currentCfg().watermarkCol.g},
-                {"b", this->currentCfg().watermarkCol.b},
-                {"a", this->currentCfg().watermarkCol.a}
-            }}
+        {"snaplines", this->currentCfg().snaplines},
+        {"snaplinesCol", {
+            {"r", this->currentCfg().snaplinesCol.r},
+            {"g", this->currentCfg().snaplinesCol.g},
+            {"b", this->currentCfg().snaplinesCol.b},
+            {"a", this->currentCfg().snaplinesCol.a}
+        }},
+        {"snaplinesColOcl", {
+            {"r", this->currentCfg().snaplinesColOcl.r},
+            {"g", this->currentCfg().snaplinesColOcl.g},
+            {"b", this->currentCfg().snaplinesColOcl.b},
+            {"a", this->currentCfg().snaplinesColOcl.a}
+        }},
+        {"boxe", this->currentCfg().boxe},
+        {"boxeCol", {
+            {"r", this->currentCfg().boxeCol.r},
+            {"g", this->currentCfg().boxeCol.g},
+            {"b", this->currentCfg().boxeCol.b},
+            {"a", this->currentCfg().boxeCol.a}
+        }},
+        {"boxeColOcl", {
+            {"r", this->currentCfg().boxeColOcl.r},
+            {"g", this->currentCfg().boxeColOcl.g},
+            {"b", this->currentCfg().boxeColOcl.b},
+            {"a", this->currentCfg().boxeColOcl.a}
+        }},
+        {"watermark", this->currentCfg().watermark},
+        {"watermarkCol", {
+            {"r", this->currentCfg().watermarkCol.r},
+            {"g", this->currentCfg().watermarkCol.g},
+            {"b", this->currentCfg().watermarkCol.b},
+            {"a", this->currentCfg().watermarkCol.a}
+        }},
+        {"indicators", this->currentCfg().indicators},
+        {"indicatorsCol", {
+            {"r", this->currentCfg().indicatorsCol.r},
+            {"g", this->currentCfg().indicatorsCol.g},
+            {"b", this->currentCfg().indicatorsCol.b},
+            {"a", this->currentCfg().indicatorsCol.a}
+        }},
+        {"viewmodel", this->currentCfg().viewmodel},
+        {"viewmodelOffs", {
+            {"x", this->currentCfg().viewmodelOff.x},
+            {"y", this->currentCfg().viewmodelOff.y},
+            {"z", this->currentCfg().viewmodelOff.z},
+            {"yaw", this->currentCfg().viewmodelAngOff.x},
+            {"pitch", this->currentCfg().viewmodelAngOff.y},
+            {"roll", this->currentCfg().viewmodelAngOff.z},
+            {"fov", this->currentCfg().fov},
+            {"viewmodelFov", this->currentCfg().viewmodelFov}
+        }},
+        {"bop", this->currentCfg().bop},
+
+        {"engine", this->currentCfg().engine},
+        {"engineSettings", {
+            {"fov", this->currentCfg().engineFov},
+            //{"bones", this->currentCfg().engineBones},
+            {"prefBone", this->currentCfg().enginePrefBone},
+            {"onKeyForceBone", this->currentCfg().engineOnKeyForceBone}
+        }}
     };
     std::string outputJsonString = outputJson.dump();
 

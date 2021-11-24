@@ -11,6 +11,7 @@
 #include <fstream>
 #include <mutex>
 #include <shared_mutex>
+#include <Utils/Structs/Vector.hh>
 
 #include "Utils/SharedObject.hh"
 #include "Utils/Structs/Color.hh"
@@ -35,6 +36,30 @@ struct Config_t {
 
     bool watermark = false;
     Color_t watermarkCol = Color_t{ 255, 255, 255, 255 };
+
+    // misc
+
+    bool indicators = false;
+    Color_t indicatorsCol = Color_t{ 255, 255, 255, 255 };
+
+    bool viewmodel = false;
+    float fov = 0.f;
+    float viewmodelFov = 68.f;
+    Vec3 viewmodelOff = { 0.f, 0.f, 0.f };
+    Vec3 viewmodelAngOff = { 0.f, 0.f, 0.f };
+
+    bool bop = false;
+    bool tag = false;
+    bool fovCircle = false;
+
+    // engine
+
+    bool engine = false;
+    float engineFov = 0.f;
+    std::vector<uint32_t> engineBones = {  };
+    uint32_t enginePrefBone = 0;
+    uint32_t engineOnKeyForceBone = 0;
+
 
     int inslider = 0;
 
