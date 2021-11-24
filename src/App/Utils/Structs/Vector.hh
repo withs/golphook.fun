@@ -36,6 +36,14 @@ struct Vec3 {
         return Vec3{this->x * rhs.x, this->y * rhs.y, this->z * rhs.z};
     }
 
+    inline Vec3 operator+ (const float withFloat) const noexcept {
+        return Vec3{this->x + withFloat, this->y + withFloat, this->z + withFloat};
+    }
+
+    inline Vec3 operator* (const float withFloat) const noexcept {
+        return Vec3{this->x * withFloat, this->y * withFloat, this->z * withFloat};
+    }
+
     inline float dot_product(const Vec3& rhs) const noexcept {
         return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z;
     }

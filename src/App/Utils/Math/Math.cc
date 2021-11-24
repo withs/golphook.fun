@@ -38,3 +38,30 @@ bool Math::worldToScreen( const Vec3& in, Vec3& out ) {
     }
     return false;
 }
+
+void Math::sinCos(float withRadian, float& andSin, float& andCos) {
+    andSin = std::sin(withRadian);
+    andCos = std::cos(withRadian);
+}
+
+
+void Math::angleToVectors(Vec3 &withAngle, Vec3 &andFor, Vec3 &andRight, Vec3 &andUp) {
+
+    float sp, sy, sr, cp, cy, cr;
+
+    Math::sinCos(Consts::radian * withAngle.x, sp, cp);
+    Math::sinCos(Consts::radian * withAngle.y, sy, cy);
+    Math::sinCos(Consts::radian * withAngle.z, sr, cr);
+
+    andFor.x = cp * cy;
+    andFor.y = cp * sy;
+    andFor.z = -sp;
+
+    andRight.x = -1.0f * sr * sp * cy + -1.0f * cr * -sy;
+    andRight.y = -1.0f * sr * sp * sy + -1.0f * cr * cy;
+    andRight.z = -1.0f * sr * cp;
+
+    andUp.x = cr * sp * cy + -sr * -sy;
+    andUp.y = cr * sp * sy + -sr * cy;
+    andUp.z = cr * cp;
+}
