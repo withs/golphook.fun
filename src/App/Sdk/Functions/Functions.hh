@@ -5,9 +5,11 @@
 #ifndef GOLPHOOK_FUN_FUNCTIONS_HH
 #define GOLPHOOK_FUN_FUNCTIONS_HH
 
+#include "Utils/Memory/Mem.hh"
 
 class Functions {
-
+    public:
+         static void SetClantag(std::string withText);
 };
 
 
