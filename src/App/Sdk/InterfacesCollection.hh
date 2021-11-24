@@ -13,6 +13,7 @@
 #include "Interfaces/IEntityList.h"
 #include "Interfaces/client_class.h"
 #include "Interfaces/IEngineTrace.hh"
+#include "Interfaces/CInput.hh"
 
 class InterfacesCollection {
     public:
@@ -24,6 +25,7 @@ class InterfacesCollection {
          static inline IInputSystem* i_inputSystem;
          static inline ISurface* i_surface;
          static inline IEngineTrace* i_engineTrace;
+         static inline CInput* i_cinput;
 };
 
 
