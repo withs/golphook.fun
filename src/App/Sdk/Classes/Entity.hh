@@ -5,11 +5,13 @@
 #ifndef GOLPHOOK_FUN_ENTITY_HH
 #define GOLPHOOK_FUN_ENTITY_HH
 
+#include <Sdk/Interfaces/Misc/Enums.hh>
 #include "Utils/Structs/Vector.hh"
 #include "Utils/Memory/Mem.hh"
 
 #include "Sdk/Interfaces/client_class.h"
 #include "Sdk/Interfaces/Misc/BaseHandle.hh"
+#include "Sdk/Interfaces/Misc/Enums.hh"
 #include "Netvars/NetvarsCollection.hh"
 
 class c_econ_item_view;
@@ -82,6 +84,29 @@ class Entity_t {
              return Mem::callVirtual< ClientClass*, 2 >(networkable());
          }
 
+         Vec3& absOrigin() {
+             //return Mem::callVirtual< Vec3,10 >(this);
+             using original_fn = Vec3 & (__thiscall*)(void*);
+             return (*(original_fn**)this)[10](this);;
+         }
+
+         Vec3& absAngle() {
+             using original_fn = Vec3 & (__thiscall*)(void*);
+             return (*(original_fn**)this)[11](this);;
+         }
+
+         void setAbsOrigin(Vec3 withOrigin) {
+             using oFnSetAbsOrigin = void(__thiscall*)(void*, const Vec3&);
+             static auto oSetAbsOrigin = reinterpret_cast<oFnSetAbsOrigin>(Mem::patternScan(GetModuleHandleA("client.dll"), "55 8B EC 83 E4 F8 51 53 56 57 8B F1 E8"));
+             oSetAbsOrigin(this, withOrigin);
+         }
+
+         void setAbsAngle(Vec3 withAngle) {
+             using oFnSetAbsAngle = void(__thiscall*)(void*, const Vec3&);
+             static auto oSetAbsAngle = reinterpret_cast<oFnSetAbsAngle>(Mem::patternScan(GetModuleHandleA("client.dll"), "55 8B EC 83 E4 F8 83 EC 64 53 56 57 8B F1 E8"));
+             oSetAbsAngle(this, withAngle);
+         }
+
          // Player related NETVARS
          auto health() {
              return Mem::getValOffset< int32_t >(NetvarsCollection::m_iHealth, this);
@@ -115,6 +140,26 @@ class Entity_t {
              return Mem::getValOffset<Vec3>(NetvarsCollection::m_vecOrigin + NetvarsCollection::m_vecViewOffset, this);
          }
 
+         int32_t viewmodelHandle () {
+             return Mem::getValOffset<int32_t>(NetvarsCollection::m_hViewModelz, this);
+         }
+
+         int32_t fov() {
+             return Mem::getValOffset<int32_t>(NetvarsCollection::m_iDefaultFOV, this);
+         }
+
+         void setFov(int32_t withFov) {
+             //*((int32_t*)(this + )) = withFov;
+             Mem::setValOffset<int32_t>(withFov, NetvarsCollection::m_iDefaultFOV, this);
+         }
+
+         EntityFlags flags() {
+             return Mem::getValOffset< EntityFlags >(NetvarsCollection::m_fFlags, this);
+         }
+
+         MoveType_t moveType() {
+             return Mem::getValOffset< MoveType_t >(NetvarsCollection::m_MoveType, this);
+         }
 
 };
 
