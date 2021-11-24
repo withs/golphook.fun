@@ -28,7 +28,7 @@ class Interfaces: public SharedObject<Interfaces> {
             oCreateInterface pCreateInterface;
 
             if ( moduleHandle = GetModuleHandleA(fromModuleName.c_str()) ) {
-                if ( pCreateInterface = (oCreateInterface)GetProcAddress(moduleHandle, "CreateInterface") ) {
+                if ( (pCreateInterface = (oCreateInterface)GetProcAddress(moduleHandle, "CreateInterface")) ) {
                     T* interfaceAddr;
                     if ( !( interfaceAddr = (T*)(pCreateInterface(const_cast<char*>(withName.c_str()), 0)) ) ) {
                         throw FatalError::CreateInterfaceError("Null address returned for interface: " + withName + " from module: " + fromModuleName);
