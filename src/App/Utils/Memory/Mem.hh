@@ -26,7 +26,12 @@ class Mem {
 
          template <class T>
          static T getValOffset(uintptr_t withOffset, void* inObject) {
-             return *reinterpret_cast< T* >((uintptr_t)inObject + withOffset);
+             return *(reinterpret_cast< T* >((uintptr_t)inObject + withOffset));
+         }
+
+         template <class T>
+         static void setValOffset(T forValue, uintptr_t withOffset, void* inObject) {
+             *(reinterpret_cast< T* >((uintptr_t)inObject + withOffset)) = forValue;
          }
 };
 
