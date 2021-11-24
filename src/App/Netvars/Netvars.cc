@@ -44,6 +44,9 @@ NetvarsDumper::NetvarsDumper() {
     NetvarsCollection::m_vecOrigin = this->getNetVarOffset("DT_BasePlayer", "m_vecOrigin");
     NetvarsCollection::m_dwBoneMatrix = this->getNetVarOffset("DT_BaseAnimating", "m_nForceBone") + 28;
     NetvarsCollection::m_vecViewOffset = this->getNetVarOffset("DT_BasePlayer", "m_vecViewOffset[0]");
+    NetvarsCollection::m_vecViewOffset = this->getNetVarOffset("DT_BasePlayer", "m_iDefaultFOV");
+    NetvarsCollection::m_fFlags = this->getNetVarOffset("DT_BasePlayer", "m_fFlags");
+    NetvarsCollection::m_MoveType = this->getNetVarOffset("DT_BasePlayer", "m_nRenderMode") + 1;
 };
 
 
