@@ -19,8 +19,6 @@ class DrawQueue: public SharedObject<DrawQueue> {
 
     public:
 
-         DrawQueue();
-
          void push(std::shared_ptr<DrawToolBase> drawAction) noexcept;
 
          uint32_t len() noexcept;

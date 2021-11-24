@@ -8,6 +8,7 @@
 
 #include "Utils/Structs/Color.hh"
 #include "Utils/Structs/Vector.hh"
+#include "Utils/Math/Math.hh"
 
 
 struct DrawToolBase {
@@ -37,6 +38,22 @@ struct DrawRectb final: public DrawToolBase {
 
     constexpr DrawRectb() = default;
     inline ~DrawRectb() = default;;
+};
+
+struct DrawCirlceb final: public DrawToolBase {
+    Color_t _color { };
+    Vec2<int32_t> _pos { };
+    int16_t _radius;
+
+    DrawCirlceb(Vec2<int32_t> toPos, int16_t withRadius, Color_t andColor) {
+        this->_pos = toPos;
+        this->_color = andColor;
+        this->_radius = withRadius;
+    };
+    bool draw() override;
+
+    constexpr DrawCirlceb() = default;
+    inline ~DrawCirlceb() = default;;
 };
 
 struct DrawLineb final: public DrawToolBase {

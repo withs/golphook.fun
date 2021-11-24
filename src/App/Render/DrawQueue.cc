@@ -4,10 +4,6 @@
 
 #include "DrawQueue.hh"
 
-DrawQueue::DrawQueue() {
-
-}
-
 void DrawQueue::push(std::shared_ptr<DrawToolBase> drawAction) noexcept {
     std::unique_lock lock(this->_queueMutex);
     this->_queue.push_back(drawAction);

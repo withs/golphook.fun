@@ -99,3 +99,15 @@ bool DrawLineb::draw() {
     DrawItemsCollection::Get().l_line->Draw(line, 2, static_cast<D3DCOLOR>(this->_color));
     return true;
 }
+
+bool DrawCirlceb::draw() {
+    for (int i = 1; i <= 360; i += 10)
+    {
+        int x = i + 10;
+        Vec2<int32_t> PositionOld{ static_cast<int32_t>(_pos.x + (_radius * cos(i * Consts::pi / 180))), static_cast<int32_t>(_pos.y + (_radius * sin(i * Consts::pi / 180))) };
+        Vec2<int32_t> PositionNew{ static_cast<int32_t>(_pos.x + (_radius * cos(x * Consts::pi / 180))), static_cast<int32_t>(_pos.y + (_radius * sin(x * Consts::pi / 180))) };
+
+        DrawLineb(PositionOld, PositionNew, 1.f, this->_color).draw();
+    }
+    return true;
+}
