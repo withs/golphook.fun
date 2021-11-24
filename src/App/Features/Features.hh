@@ -11,14 +11,19 @@
 
 #include "Utils/SharedObject.hh"
 
+#include "App.hh"
+
 #include "Features/Visuals.hh"
 #include "Features/Movements.hh"
-#include "Features//Others.hh"
+#include "Features/Others.hh"
 #include "Features/Engine.hh"
+
 
 class Features: public SharedObject<Features> {
     public:
          std::unique_ptr<Visuals> visuals;
+         std::unique_ptr<Others> others;
+         std::unique_ptr<Engine> engine;
 
          Features();
 };

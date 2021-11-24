@@ -5,6 +5,8 @@
 #ifndef GOLPHOOK_FUN_VISUALS_HH
 #define GOLPHOOK_FUN_VISUALS_HH
 
+#include "CommonIncludes.hh"
+
 #include "Sdk/Interfaces/Math/VMatrix.hpp"
 
 #include "Sdk/InterfacesCollection.hh"
@@ -21,9 +23,6 @@ class Visuals {
          bool _canSeePlayer(int32_t hitbox, Entity_t* fromPlayer, Entity_t* ToPlayer);
 
     public:
-
-         Entity_t* localPlayer;
-
          void onCreateMoove();
 };
 

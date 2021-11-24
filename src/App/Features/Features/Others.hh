@@ -5,9 +5,26 @@
 #ifndef GOLPHOOK_FUN_OTHERS_HH
 #define GOLPHOOK_FUN_OTHERS_HH
 
+#include "CommonIncludes.hh"
+
+#include "chrono"
+
+#include "Sdk/InterfacesCollection.hh"
+#include "Sdk/Functions/Functions.hh"
+#include "Sdk/Interfaces/Misc/Enums.hh"
+#include "Utils/Structs/Color.hh"
+#include "Utils/Math/Math.hh"
 
 class Others {
+    private:
+         void _bop(CUserCmd* cmd);
 
+         std::string _currentTag = "";
+         void _tag();
+
+    public:
+         void onCreateMoove(CUserCmd* cmd);
+         void overrideViewmodel();
 };
 
 

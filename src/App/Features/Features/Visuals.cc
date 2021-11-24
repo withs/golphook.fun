@@ -6,12 +6,22 @@
 
 #include "Render/DrawQueue.hh"
 
-
 void Visuals::onCreateMoove() {
     if ( Config::Get().currentCfg().watermark )
         this->_watermark();
 
     if ( InterfacesCollection::i_engineClient->IsInGame() && InterfacesCollection::i_engineClient->IsConnected() ) {
+
+        /*
+        for ( auto& ent: App::Get().entityList ) {
+            if ( Config::Get().currentCfg().snaplines )
+                this->_snapline(ent);
+
+            if ( Config::Get().currentCfg().boxe )
+                this->_boxe(ent);
+
+            // indics
+        }*/
 
         for ( uint16_t pIndex = 0; pIndex <= 32; pIndex++ ) {
 
@@ -19,11 +29,11 @@ void Visuals::onCreateMoove() {
 
             if ( (ent = InterfacesCollection::i_entityList->getClientEntity(pIndex)) ) {
 
-                if ( ent != this->localPlayer &&
+                if ( ent != App::Get().localPlayer &&
                      ent->dormant() == 0 &&
                      ent->health() > 0 &&
-                     ent->team() != this->localPlayer->team()
-                ) {
+                     ent->team() != App::Get().localPlayer->team()
+                        ) {
 
                     if ( Config::Get().currentCfg().snaplines )
                         this->_snapline(ent);
@@ -62,7 +72,7 @@ void Visuals::_snapline(Entity_t* ent) {
         std::vector<int32_t> boneToBeVisible = { 8, 42, 12, 79, 72, 71, 78 };
 
         for ( auto& bone: boneToBeVisible) {
-            if ( this->_canSeePlayer(bone, this->localPlayer, ent) ) {
+            if ( this->_canSeePlayer(bone, App::Get().localPlayer, ent) ) {
                 bc = Config::Get().currentCfg().snaplinesColOcl;
                 break;
             }
@@ -107,7 +117,7 @@ void Visuals::_boxe(Entity_t *ent) {
             std::vector<int32_t> boneToBeVisible = { 8, 42, 12, 79, 72, 71, 78 };
 
             for ( auto& bone: boneToBeVisible) {
-                if ( this->_canSeePlayer(bone, this->localPlayer, ent) ) {
+                if ( this->_canSeePlayer(bone, App::Get().localPlayer, ent) ) {
                     bc = Config::Get().currentCfg().boxeCol;
                     break;
                 }

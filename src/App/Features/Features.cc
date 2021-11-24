@@ -6,4 +6,6 @@
 
 Features::Features() {
     this->visuals = std::make_unique<Visuals>();
+    this->others = std::make_unique<Others>();
+    this->engine = std::make_unique<Engine>();
 }

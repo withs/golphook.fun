@@ -14,8 +14,15 @@ void __stdcall FrameStageNotify::hooked(int32_t dum) {
         App::Get().io.windWidth = w;
         FrameStageNotify::original(dum);
 
-        Features::Get().visuals->localPlayer = InterfacesCollection::i_entityList->getClientEntity(
+        App::Get().localPlayer = InterfacesCollection::i_entityList->getClientEntity(
                 InterfacesCollection::i_engineClient->GetLocalPlayer()
         );
+
+        if ( App::Get().ready ) {
+            App::Get().collectEntities();
+            Features::Get().engine->onCreateMoove();
+            Features::Get().visuals->onCreateMoove();
+            App::Get().entityList.clear();
+        }
     }
 }
