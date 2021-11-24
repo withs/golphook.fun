@@ -253,6 +253,50 @@ void Menu::render() {
 
                 break;
             case ::ENGINE:
+                nk_layout_row_dynamic(this->_ctx, 270, 2);
+
+                if ( nk_group_begin(this->_ctx, "engine1", NK_WINDOW_BORDER) ) {
+                    nk_checkbox_label(this->_ctx, "Engine", &Config::Get().currentCfg().engine);
+
+                    nk_property_float(this->_ctx, "Fov:", 0, &Config::Get().currentCfg().engineFov, 100.f, 1.f, 0.2f);
+
+                    /*
+                    // Bones (mult)
+                    if ( nk_combo_begin_label(this->_ctx, buffer, nk_vec2(200,200)) ) {
+                        nk_selectable_label(this->_ctx, "bone1", NK_TEXT_LEFT, &selected[0]);
+                        nk_selectable_label(this->_ctx, "bone2", NK_TEXT_LEFT, &selected[0]);
+                        nk_selectable_label(this->_ctx, "bone3", NK_TEXT_LEFT, &selected[0]);
+                        nk_selectable_label(this->_ctx, "bone4", NK_TEXT_LEFT, &selected[0]);
+                        nk_combo_end(this->_ctx);
+                    }
+
+                    // pref bone (sing)
+                    if ( nk_combo_begin_label(this->_ctx, buffer, nk_vec2(200,200)) ) {
+                        nk_selectable_label(this->_ctx, "bone1", NK_TEXT_LEFT, &selected[0]);
+                        nk_selectable_label(this->_ctx, "bone2", NK_TEXT_LEFT, &selected[0]);
+                        nk_selectable_label(this->_ctx, "bone3", NK_TEXT_LEFT, &selected[0]);
+                        nk_selectable_label(this->_ctx, "bone4", NK_TEXT_LEFT, &selected[0]);
+                        nk_combo_end(this->_ctx);
+                    }
+
+                    // on key force bone (sing)
+                    if ( nk_combo_begin_label(this->_ctx, buffer, nk_vec2(200,200)) ) {
+                        nk_selectable_label(this->_ctx, "bone1", NK_TEXT_LEFT, &selected[0]);
+                        nk_selectable_label(this->_ctx, "bone2", NK_TEXT_LEFT, &selected[0]);
+                        nk_selectable_label(this->_ctx, "bone3", NK_TEXT_LEFT, &selected[0]);
+                        nk_selectable_label(this->_ctx, "bone4", NK_TEXT_LEFT, &selected[0]);
+                        nk_combo_end(this->_ctx);
+                    }
+                    */
+                    nk_group_end(this->_ctx);
+                }
+
+                if ( nk_group_begin(this->_ctx, "engine2", NK_WINDOW_BORDER) ) {
+
+
+                    nk_group_end(this->_ctx);
+                }
+
                 break;
             case ::VHV:
                 break;
@@ -262,12 +306,96 @@ void Menu::render() {
 
                 nk_layout_row_dynamic(this->_ctx, 270, 2);
 
-                if (nk_group_begin(this->_ctx, "Group_top", NK_WINDOW_BORDER)) {
+                if (nk_group_begin(this->_ctx, "other1", NK_WINDOW_BORDER)) {
+
+                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+
+                    nk_layout_row_push(this->_ctx, 0.75f);
+                    nk_checkbox_label(this->_ctx, "Indicators", &Config::Get().currentCfg().indicators);
+
+                    if ( Config::Get().currentCfg().indicators ) {
+                        nk_layout_row_push(this->_ctx, 0.25f);
+                        if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().indicatorsCol)), nk_vec2(300,400)) ) {
+                            nk_layout_row_dynamic(this->_ctx, 120, 1);
+
+                            nk_colorf bg = static_cast<nk_colorf>(Config::Get().currentCfg().indicatorsCol);
+
+                            bg = nk_color_picker(this->_ctx, bg, NK_RGBA);
+                            nk_layout_row_dynamic(this->_ctx, 25, 1);
+                            bg.r = nk_propertyf(this->_ctx, "#R:", 0, bg.r, 1.0f, 0.01f,0.005f);
+                            bg.g = nk_propertyf(this->_ctx, "#G:", 0, bg.g, 1.0f, 0.01f,0.005f);
+                            bg.b = nk_propertyf(this->_ctx, "#B:", 0, bg.b, 1.0f, 0.01f,0.005f);
+                            bg.a = nk_propertyf(this->_ctx, "#A:", 0, bg.a, 1.0f, 0.01f,0.005f);
+
+                            Config::Get().currentCfg().indicatorsCol = Color_t(bg);
+                            nk_combo_end(this->_ctx);
+                        }
+                    }
+
+                    nk_layout_row_end(this->_ctx);
+
+                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                    nk_layout_row_push(this->_ctx, 0.75f);
+                    nk_checkbox_label(this->_ctx, "Viewmodel", &Config::Get().currentCfg().viewmodel);
+                    nk_layout_row_end(this->_ctx);
+
+
+                    if ( Config::Get().currentCfg().viewmodel ) {
+                        nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                        nk_layout_row_push(this->_ctx, 0.75f);
+                        nk_property_float(this->_ctx, "Fov:", 90.f, &Config::Get().currentCfg().fov, 120.0f, 1.f, 0.2f);
+                        nk_layout_row_end(this->_ctx);
+
+                        nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                        nk_layout_row_push(this->_ctx, 0.75f);
+                        nk_property_float(this->_ctx, "Viewmodel fov:", 68.f, &Config::Get().currentCfg().viewmodelFov, 120.0f, 1.f, 0.2f);
+                        nk_layout_row_end(this->_ctx);
+
+                        nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                        nk_layout_row_push(this->_ctx, 0.75f);
+                        nk_property_float(this->_ctx, "X:", -20, &Config::Get().currentCfg().viewmodelOff.x, 20.0f, 0.1f, 0.2f);
+                        nk_layout_row_end(this->_ctx);
+
+                        nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                        nk_layout_row_push(this->_ctx, 0.75f);
+                        nk_property_float(this->_ctx, "Y:", -20, &Config::Get().currentCfg().viewmodelOff.y, 20.0f, 0.1f, 0.2f);
+                        nk_layout_row_end(this->_ctx);
+
+                        nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                        nk_layout_row_push(this->_ctx, 0.75f);
+                        nk_property_float(this->_ctx, "Z:", -20, &Config::Get().currentCfg().viewmodelOff.z, 20.0f, 0.1f, 0.2f);
+                        nk_layout_row_end(this->_ctx);
+
+                        nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                        nk_layout_row_push(this->_ctx, 0.75f);
+                        nk_property_float(this->_ctx, "Yaw:", -180.f, &Config::Get().currentCfg().viewmodelAngOff.x, 180.0f, 0.1f, 0.2f);
+                        nk_layout_row_end(this->_ctx);
+
+                        nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                        nk_layout_row_push(this->_ctx, 0.75f);
+                        nk_property_float(this->_ctx, "Pitch:", -180.f, &Config::Get().currentCfg().viewmodelAngOff.y, 180.0f, 0.1f, 0.2f);
+                        nk_layout_row_end(this->_ctx);
+
+                        nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                        nk_layout_row_push(this->_ctx, 0.75f);
+                        nk_property_float(this->_ctx, "Roll:", -180.f, &Config::Get().currentCfg().viewmodelAngOff.z, 180.0f, 0.1f, 0.2f);
+                        nk_layout_row_end(this->_ctx);
+                    }
+
+                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                    nk_layout_row_push(this->_ctx, 0.75f);
+                    nk_checkbox_label(this->_ctx, "Bop", &Config::Get().currentCfg().bop);
+                    nk_layout_row_end(this->_ctx);
+
+                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                    nk_layout_row_push(this->_ctx, 0.75f);
+                    nk_checkbox_label(this->_ctx, "Tag", &Config::Get().currentCfg().tag);
+                    nk_layout_row_end(this->_ctx);
 
                     nk_group_end(this->_ctx);
                 }
 
-                if (nk_group_begin(this->_ctx, "Group_top", NK_WINDOW_BORDER)) {
+                if (nk_group_begin(this->_ctx, "other2", NK_WINDOW_BORDER)) {
                     nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
 
                     nk_layout_row_push(this->_ctx, 0.50f);
@@ -279,6 +407,7 @@ void Menu::render() {
                         Config::Get().saveConfigToFile("b");
 
                     nk_layout_row_end(this->_ctx);
+
 
                     nk_group_end(this->_ctx);
                 }

@@ -32,6 +32,8 @@ enum MenuTabs {
     OTHERS
 };
 
+static const char *weapons[] = {"Fist","Pistol","Shotgun","Plasma","BFG"};
+
 class Menu: public SharedObject<Menu> {
     private:
          struct nk_context* _ctx;
