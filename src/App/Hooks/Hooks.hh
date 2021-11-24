@@ -20,6 +20,8 @@
 #include "Hooks/LockCursor.hh"
 #include "Hooks/CreateMoove.hh"
 #include "Hooks/FrameStageNotify.hh"
+#include "Hooks/GetViewmodelFov.hh"
+#include "Hooks/OverrideView.hh"
 
 class Hooks: public SharedObject<Hooks> {
     public:

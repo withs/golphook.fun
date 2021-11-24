@@ -9,13 +9,13 @@
 
 #include "App.hh"
 
-typedef bool(__stdcall* oFnCreateMoove)(float, void*);
+typedef bool(__thiscall* oFnCreateMoove)(IBaseClientDLL*, int, float, bool);
 
 class CreateMoove {
     public:
          static inline oFnCreateMoove original;
-         static bool __stdcall hooked(float dum, void* dumm);
+         static bool __stdcall hooked(int sequence_number, float input_sample_frametime, bool active, bool bSendPacket);
+         static void __stdcall proxy(int sequence_number, float input_sample_frametime, bool active);
 };
-
 
 #endif //GOLPHOOK_FUN_CREATEMOOVE_HH
