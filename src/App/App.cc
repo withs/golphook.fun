@@ -72,30 +72,6 @@ void App::run() {
         if ( GetAsyncKeyState(VK_INSERT) & 1 ) {
         }
 
-
-        if ( GetAsyncKeyState(0x41) & 1 ) {
-            /*
-            for ( uint32_t pIndex = 0; pIndex <= 16; pIndex++ ) {
-                Entity_t* player = InterfacesCollection::i_entityList->getClientEntity(pIndex);
-                if ( player ) {
-                    PLOGD << player->health() << " - " << player->isAlive();
-                }
-            }*/
-
-            //Entity_t* player = InterfacesCollection::i_entityList->getClientEntity(InterfacesCollection::i_engineClient->GetLocalPlayer());
-            //PLOGD << player->health();
-
-            // PLOGD << NetvarsDumper::Get().getNetVarOffset("DT_BaseAnimating", "m_nForceBone"); -> 9868
-
-            uintptr_t ent = reinterpret_cast<uintptr_t>(InterfacesCollection::i_entityList->getClientEntity(
-                    InterfacesCollection::i_engineClient->GetLocalPlayer()));
-            Entity_t* player = InterfacesCollection::i_entityList->getClientEntity(InterfacesCollection::i_engineClient->GetLocalPlayer());
-
-            Entity_t* abc = (Entity_t*)ent;
-
-        }
-
-
         if ( GetAsyncKeyState(VK_END) & 1 ) {
             break;
         }

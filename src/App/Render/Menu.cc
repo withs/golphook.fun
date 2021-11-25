@@ -256,9 +256,16 @@ void Menu::render() {
                 nk_layout_row_dynamic(this->_ctx, 270, 2);
 
                 if ( nk_group_begin(this->_ctx, "engine1", NK_WINDOW_BORDER) ) {
-                    nk_checkbox_label(this->_ctx, "Engine", &Config::Get().currentCfg().engine);
 
+                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                    nk_layout_row_push(this->_ctx, 0.75f);
+                    nk_checkbox_label(this->_ctx, "Engine", &Config::Get().currentCfg().engine);
+                    nk_layout_row_end(this->_ctx);
+
+                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                    nk_layout_row_push(this->_ctx, 0.75f);
                     nk_property_float(this->_ctx, "Fov:", 0, &Config::Get().currentCfg().engineFov, 100.f, 1.f, 0.2f);
+                    nk_layout_row_end(this->_ctx);
 
                     /*
                     // Bones (mult)
@@ -304,7 +311,7 @@ void Menu::render() {
                 break;
             case ::OTHERS:
 
-                nk_layout_row_dynamic(this->_ctx, 270, 2);
+                nk_layout_row_dynamic(this->_ctx, 250, 2);
 
                 if (nk_group_begin(this->_ctx, "other1", NK_WINDOW_BORDER)) {
 
@@ -390,6 +397,32 @@ void Menu::render() {
                     nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
                     nk_layout_row_push(this->_ctx, 0.75f);
                     nk_checkbox_label(this->_ctx, "Tag", &Config::Get().currentCfg().tag);
+                    nk_layout_row_end(this->_ctx);
+
+                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+
+                    nk_layout_row_push(this->_ctx, 0.75f);
+                    nk_checkbox_label(this->_ctx, "Fov circle", &Config::Get().currentCfg().fovCircle);
+
+                    if ( Config::Get().currentCfg().fovCircle ) {
+                        nk_layout_row_push(this->_ctx, 0.25f);
+                        if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().fovCircleCol)), nk_vec2(300,400)) ) {
+                            nk_layout_row_dynamic(this->_ctx, 120, 1);
+
+                            nk_colorf bg = static_cast<nk_colorf>(Config::Get().currentCfg().fovCircleCol);
+
+                            bg = nk_color_picker(this->_ctx, bg, NK_RGBA);
+                            nk_layout_row_dynamic(this->_ctx, 25, 1);
+                            bg.r = nk_propertyf(this->_ctx, "#R:", 0, bg.r, 1.0f, 0.01f,0.005f);
+                            bg.g = nk_propertyf(this->_ctx, "#G:", 0, bg.g, 1.0f, 0.01f,0.005f);
+                            bg.b = nk_propertyf(this->_ctx, "#B:", 0, bg.b, 1.0f, 0.01f,0.005f);
+                            bg.a = nk_propertyf(this->_ctx, "#A:", 0, bg.a, 1.0f, 0.01f,0.005f);
+
+                            Config::Get().currentCfg().fovCircleCol = Color_t(bg);
+                            nk_combo_end(this->_ctx);
+                        }
+                    }
+
                     nk_layout_row_end(this->_ctx);
 
                     nk_group_end(this->_ctx);

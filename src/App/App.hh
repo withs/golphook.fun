@@ -31,6 +31,7 @@ class App: public SharedObject<App> {
          bool ready = false;
          std::vector<Entity_t*> entityList = {  };
          Entity_t* localPlayer;
+         CUserCmd* cmd;
 
          static void bootstrap(HMODULE withModuleHandle);
          void run();

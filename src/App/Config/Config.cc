@@ -80,6 +80,12 @@ void Config::loadConfigFromFile(std::filesystem::path fromPath) {
         fromFileConfig.indicatorsCol.b  = inputJson["cfg"]["indicatorsCol"]["b"];
         fromFileConfig.indicatorsCol.a  = inputJson["cfg"]["indicatorsCol"]["a"];
 
+        fromFileConfig.fovCircle = inputJson["cfg"]["fovCircle"];
+        fromFileConfig.fovCircleCol.r  = inputJson["cfg"]["fovCircleCol"]["r"];
+        fromFileConfig.fovCircleCol.g  = inputJson["cfg"]["fovCircleCol"]["g"];
+        fromFileConfig.fovCircleCol.b  = inputJson["cfg"]["fovCircleCol"]["b"];
+        fromFileConfig.fovCircleCol.a  = inputJson["cfg"]["fovCircleCol"]["a"];
+
         fromFileConfig.viewmodel = inputJson["cfg"]["viewmodel"];
         fromFileConfig.viewmodelOff.x = inputJson["cfg"]["viewmodelOffs"]["x"];
         fromFileConfig.viewmodelOff.y = inputJson["cfg"]["viewmodelOffs"]["y"];
@@ -91,11 +97,13 @@ void Config::loadConfigFromFile(std::filesystem::path fromPath) {
         fromFileConfig.fov = inputJson["cfg"]["viewmodelOffs"]["fov"];
 
         fromFileConfig.bop = inputJson["cfg"]["bop"];
+        fromFileConfig.tag = inputJson["cfg"]["tag"];
 
         fromFileConfig.engine = inputJson["cfg"]["engine"];
         fromFileConfig.engineFov = inputJson["cfg"]["engineSettings"]["fov"];
         //fromFileConfig.engineBones = inputJson["cfg"]["engineSettings"]["bones"];
-        fromFileConfig.enginePrefBone = inputJson["cfg"]["engineSettings"]["prefBones"];
+
+        fromFileConfig.enginePrefBone = inputJson["cfg"]["engineSettings"]["prefBone"];
         fromFileConfig.engineOnKeyForceBone = inputJson["cfg"]["engineSettings"]["onKeyForceBone"];
 
         this->_configList.push_back(fromFileConfig);
@@ -163,12 +171,20 @@ void Config::saveConfigToFile(std::string withName) {
             {"b", this->currentCfg().watermarkCol.b},
             {"a", this->currentCfg().watermarkCol.a}
         }},
+
         {"indicators", this->currentCfg().indicators},
         {"indicatorsCol", {
             {"r", this->currentCfg().indicatorsCol.r},
             {"g", this->currentCfg().indicatorsCol.g},
             {"b", this->currentCfg().indicatorsCol.b},
             {"a", this->currentCfg().indicatorsCol.a}
+        }},
+        {"fovCircle", this->currentCfg().snaplines},
+        {"fovCircleCol", {
+            {"r", this->currentCfg().fovCircleCol.r},
+            {"g", this->currentCfg().fovCircleCol.g},
+            {"b", this->currentCfg().fovCircleCol.b},
+            {"a", this->currentCfg().fovCircleCol.a}
         }},
         {"viewmodel", this->currentCfg().viewmodel},
         {"viewmodelOffs", {
@@ -182,6 +198,7 @@ void Config::saveConfigToFile(std::string withName) {
             {"viewmodelFov", this->currentCfg().viewmodelFov}
         }},
         {"bop", this->currentCfg().bop},
+        {"tag", this->currentCfg().tag},
 
         {"engine", this->currentCfg().engine},
         {"engineSettings", {

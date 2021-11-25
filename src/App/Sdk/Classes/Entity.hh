@@ -120,6 +120,10 @@ class Entity_t {
              return Mem::getValOffset< bool >(NetvarsCollection::m_iTeamNum, this);
          }
 
+         Vec3 viewOffset() {
+             return Mem::getValOffset< Vec3 >(NetvarsCollection::m_vecViewOffset, this);
+         }
+
          Vec3 origin() {
              return Mem::getValOffset< Vec3 >(NetvarsCollection::m_vecOrigin, this);
          }
@@ -137,7 +141,8 @@ class Entity_t {
          }
 
          Vec3 getEyePos() {
-             return Mem::getValOffset<Vec3>(NetvarsCollection::m_vecOrigin + NetvarsCollection::m_vecViewOffset, this);
+
+             return this->origin() + this->viewOffset();
          }
 
          int32_t viewmodelHandle () {

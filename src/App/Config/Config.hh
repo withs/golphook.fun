@@ -51,14 +51,15 @@ struct Config_t {
     bool bop = false;
     bool tag = false;
     bool fovCircle = false;
+    Color_t fovCircleCol = Color_t{ 255, 255, 255, 255 };
 
     // engine
 
     bool engine = false;
     float engineFov = 0.f;
     std::vector<uint32_t> engineBones = {  };
-    uint32_t enginePrefBone = 0;
-    uint32_t engineOnKeyForceBone = 0;
+    int32_t enginePrefBone = -1;
+    int32_t engineOnKeyForceBone = -1;
 
 
     int inslider = 0;
