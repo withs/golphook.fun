@@ -18,11 +18,10 @@ void __stdcall FrameStageNotify::hooked(int32_t dum) {
                 InterfacesCollection::i_engineClient->GetLocalPlayer()
         );
 
-        if ( App::Get().ready ) {
-            App::Get().collectEntities();
-            Features::Get().engine->onCreateMoove();
-            Features::Get().visuals->onCreateMoove();
-            App::Get().entityList.clear();
-        }
+        App::Get().collectEntities();
+        Features::Get().engine->onFrame();
+        Features::Get().visuals->onFrame();
+        Features::Get().others->onFrame();
+        App::Get().entityList.clear();
     }
 }

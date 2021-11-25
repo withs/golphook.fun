@@ -17,13 +17,16 @@
 
 class Others {
     private:
-         void _bop(CUserCmd* cmd);
+         void _bop();
 
          std::string _currentTag = "";
          void _tag();
+         void _fovCircle();
 
     public:
-         void onCreateMoove(CUserCmd* cmd);
+         void onCreateMoove();
+         void onFrame();
+
          void overrideViewmodel();
 };
 

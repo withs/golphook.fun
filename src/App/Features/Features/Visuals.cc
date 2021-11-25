@@ -6,13 +6,12 @@
 
 #include "Render/DrawQueue.hh"
 
-void Visuals::onCreateMoove() {
+void Visuals::onFrame() {
     if ( Config::Get().currentCfg().watermark )
         this->_watermark();
 
     if ( InterfacesCollection::i_engineClient->IsInGame() && InterfacesCollection::i_engineClient->IsConnected() ) {
 
-        /*
         for ( auto& ent: App::Get().entityList ) {
             if ( Config::Get().currentCfg().snaplines )
                 this->_snapline(ent);
@@ -21,34 +20,9 @@ void Visuals::onCreateMoove() {
                 this->_boxe(ent);
 
             // indics
-        }*/
-
-        for ( uint16_t pIndex = 0; pIndex <= 32; pIndex++ ) {
-
-            Entity_t* ent;
-
-            if ( (ent = InterfacesCollection::i_entityList->getClientEntity(pIndex)) ) {
-
-                if ( ent != App::Get().localPlayer &&
-                     ent->dormant() == 0 &&
-                     ent->health() > 0 &&
-                     ent->team() != App::Get().localPlayer->team()
-                        ) {
-
-                    if ( Config::Get().currentCfg().snaplines )
-                        this->_snapline(ent);
-
-                    if ( Config::Get().currentCfg().boxe )
-                        this->_boxe(ent);
-
-                }
-
-            }
-
         }
 
     }
-
 }
 
 void Visuals::_snapline(Entity_t* ent) {

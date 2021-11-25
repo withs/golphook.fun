@@ -9,14 +9,14 @@ bool __stdcall CreateMoove::hooked(int sequence_number, float input_sample_frame
 
     CreateMoove::original(InterfacesCollection::i_baseClient, sequence_number, input_sample_frametime, active);
 
-    CUserCmd* cmd = InterfacesCollection::i_cinput->GetUserCmd(sequence_number);
-    CVerifiedUserCmd* verified = InterfacesCollection::i_cinput->GetVerifiedCmd(sequence_number);
+    App::Get().cmd = InterfacesCollection::i_cinput->GetUserCmd(sequence_number);
+    CVerifiedUserCmd    * verified = InterfacesCollection::i_cinput->GetVerifiedCmd(sequence_number);
 
     if ( App::Get().ready ) {
-        Features::Get().others->onCreateMoove(cmd);
+        Features::Get().others->onCreateMoove();
     }
-    verified->m_cmd = *cmd;
-    verified->m_crc = cmd->GetChecksum();
+    verified->m_cmd = *App::Get().cmd;
+    verified->m_crc = App::Get().cmd->GetChecksum();
     return false;
 }
 

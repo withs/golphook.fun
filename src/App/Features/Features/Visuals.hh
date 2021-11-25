@@ -23,7 +23,7 @@ class Visuals {
          bool _canSeePlayer(int32_t hitbox, Entity_t* fromPlayer, Entity_t* ToPlayer);
 
     public:
-         void onCreateMoove();
+         void onFrame();
 };
 
 

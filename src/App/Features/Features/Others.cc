@@ -5,7 +5,7 @@
 #include "Others.hh"
 #include "App.hh"
 
-void Others::onCreateMoove(CUserCmd* cmd) {
+void Others::onCreateMoove() {
 
     if ( InterfacesCollection::i_engineClient->IsInGame() && InterfacesCollection::i_engineClient->IsConnected() ) {
 
@@ -20,20 +20,17 @@ void Others::onCreateMoove(CUserCmd* cmd) {
         }
 
         if ( Config::Get().currentCfg().bop )
-            this->_bop(cmd);
+            this->_bop();
 
         if ( Config::Get().currentCfg().tag )
             this->_tag();
+    }
+}
 
+void Others::onFrame() {
+    if ( InterfacesCollection::i_engineClient->IsInGame() && InterfacesCollection::i_engineClient->IsConnected() ) {
         if ( Config::Get().currentCfg().fovCircle ) {
-            std::shared_ptr<DrawCirlceb> aa;
-            aa = std::shared_ptr<DrawCirlceb>{
-                    new DrawCirlceb(
-                            Vec2<int32_t>{App::Get().io.windHeight/2, App::Get().io.windWidth/2},
-                            Config::Get().currentCfg().engineFov,
-                            { 255, 255, 255, 255 })
-            };
-            DrawQueue::Get().push(aa);
+            this->_fovCircle();
         }
     }
 }
@@ -63,7 +60,7 @@ void Others::overrideViewmodel() {
     viewmodelEnt->setAbsAngle(angles);
 }
 
-void Others::_bop(CUserCmd *cmd) {
+void Others::_bop() {
     static bool jumped_last_tick = false;
     static bool should_fake_jump = false;
 
@@ -81,13 +78,13 @@ void Others::_bop(CUserCmd *cmd) {
 
     if( !jumped_last_tick && should_fake_jump ) {
         should_fake_jump = false;
-        cmd->buttons |= IN_JUMP;
-    } else if( cmd->buttons & IN_JUMP ) {
+        App::Get().cmd->buttons |= IN_JUMP;
+    } else if( App::Get().cmd->buttons & IN_JUMP ) {
         if( App::Get().localPlayer->flags() & FL_ONGROUND ) {
             jumped_last_tick = true;
             should_fake_jump = true;
         } else {
-            cmd->buttons &= ~IN_JUMP;
+            App::Get().cmd->buttons &= ~IN_JUMP;
             jumped_last_tick = false;
         }
     } else {
@@ -95,30 +92,6 @@ void Others::_bop(CUserCmd *cmd) {
         should_fake_jump = false;
     }
 }
-
-/*
- * static uint8_t* aa = Mem::patternScan(GetModuleHandleA("client.dll"), "8B 0D ? ? ? ? 8B D6 8B C1 83 CA 02") + 2;
-    uintptr_t baseAddrClient = (uintptr_t)GetModuleHandle("client.dll");
-
-    if ( !App::Get().localPlayer )
-        return;
-
-    if ( !App::Get().localPlayer->isAlive() )
-        return;
-
-    if ( App::Get().localPlayer->moveType() == MOVETYPE_LADDER || App::Get().localPlayer->moveType() == MOVETYPE_NOCLIP )
-        return;
-
-    if ( App::Get().localPlayer->flags() & FL_INWATER )
-        return;
-
-    int aaaa = App::Get().localPlayer->flags();
-    int vvv = App::Get().localPlayer->flags() & FL_ONGROUND;
-
-    if ( GetAsyncKeyState(VK_SPACE) )
-        if ( App::Get().localPlayer->flags() & FL_ONGROUND )
-            //*(int32_t*)(baseAddrClient + aa) = 6;
- * */
 
 void Others::_tag() {
 
@@ -154,4 +127,15 @@ void Others::_tag() {
             Functions::SetClantag(this->_currentTag);
         }
     }
+}
+
+void Others::_fovCircle() {
+    std::shared_ptr<DrawCirlceb> bb = std::shared_ptr<DrawCirlceb>{
+        new DrawCirlceb(
+                    Vec2<int32_t>{App::Get().io.windWidth/2, App::Get().io.windHeight/2},
+                    Config::Get().currentCfg().engineFov,
+                    Config::Get().currentCfg().fovCircleCol
+                )
+    };
+    DrawQueue::Get().push(bb);
 }
