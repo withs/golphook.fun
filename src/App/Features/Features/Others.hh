@@ -22,6 +22,7 @@ class Others {
          std::string _currentTag = "";
          void _tag();
          void _fovCircle();
+         void _indicators();
 
     public:
          void onCreateMoove();

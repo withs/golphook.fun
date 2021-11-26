@@ -33,6 +33,7 @@ void Others::onFrame() {
             this->_fovCircle();
         }
     }
+    this->_indicators();
 }
 
 void Others::overrideViewmodel() {
@@ -139,3 +140,42 @@ void Others::_fovCircle() {
     };
     DrawQueue::Get().push(bb);
 }
+
+void Others::_indicators() {
+
+    int count = 0;
+
+    Color_t bc = Config::Get().currentCfg().watermarkCol;
+    std::shared_ptr<DrawTextb> aa = std::shared_ptr<DrawTextb>{
+        new DrawTextb(
+                Vec2<uint32_t>{static_cast<unsigned int>(App::Get().io.windWidth/2), static_cast<unsigned int>((App::Get().io.windHeight/2 + 20) + (count * 10))},
+                "Fov: " + std::to_string(Config::Get().currentCfg().engineFov),
+                bc)
+    };
+    DrawQueue::Get().push(aa);
+
+
+    if ( Features::Get().engine->aShoot ) {
+        count++;
+        aa = std::shared_ptr<DrawTextb>{
+                new DrawTextb(
+                        Vec2<uint32_t>{static_cast<unsigned int>(App::Get().io.windWidth/2), static_cast<unsigned int>((App::Get().io.windHeight/2 + 20) + (count * 10))},
+                        "Automatic fire",
+                        bc)
+        };
+        DrawQueue::Get().push(aa);
+    }
+
+    if ( Features::Get().engine->forceBone ) {
+        count++;
+        aa = std::shared_ptr<DrawTextb>{
+                new DrawTextb(
+                        Vec2<uint32_t>{static_cast<unsigned int>(App::Get().io.windWidth/2), static_cast<unsigned int>((App::Get().io.windHeight/2 + 20) + (count * 10))},
+                        "Force bone",
+                        bc)
+        };
+        DrawQueue::Get().push(aa);
+    }
+}
+
+

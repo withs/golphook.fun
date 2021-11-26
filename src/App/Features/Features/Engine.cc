@@ -13,23 +13,16 @@ void Engine::onFrame() {
 
     if ( InterfacesCollection::i_engineClient->IsInGame() && InterfacesCollection::i_engineClient->IsConnected() ) {
         if ( Config::Get().currentCfg().engine ) {
+            this->aShoot = false;
 
             // TODO: test avec asyncKeyState ou avec wndProc
+
+            if ( GetAsyncKeyState(0x06) & 1 ) {
+                this->forceBone = !this->forceBone;
+            }
+
             if ( GetAsyncKeyState(0x05) ) {
-
-                /*
-                Indicators::Get().push(
-                        "Automatic fire",
-                        { 255, 255, 255, 255 }
-                );
-                
-                if ( this->forceBone ) {
-                    Indicators::Get().push(
-                            "Force bone",
-                            { 255, 255, 255, 255 }
-                    );
-                }*/
-
+                this->aShoot = true;
                 this->_targetedEntities.clear();
                 this->_collectTargetedEnts();
 

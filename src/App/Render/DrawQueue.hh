@@ -5,12 +5,13 @@
 #ifndef GOLPHOOK_FUN_DRAWQUEUE_HH
 #define GOLPHOOK_FUN_DRAWQUEUE_HH
 
+#include "CommonIncludes.hh"
+
 #include "DrawTools.hh"
 #include "DrawItemsCollection.hh"
 
 #include <mutex>
 #include <shared_mutex>
-
 
 class DrawQueue: public SharedObject<DrawQueue> {
     private:

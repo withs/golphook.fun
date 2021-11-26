@@ -15,7 +15,6 @@
 #include "Render/Menu.hh"
 #include "Netvars/Netvars.hh"
 #include "Render/DrawQueue.hh"
-#include "Render/Indicators.hh"
 #include "Features/Features.hh"
 
 struct AppIo {

@@ -25,7 +25,6 @@ void App::bootstrap(HMODULE withModuleHandle) {
     Menu::makeShared();
     Hooks::makeShared();
     DrawQueue::makeShared();
-    //Indicators::makeShared();
     Features::makeShared();
 
     App::Get().run();
