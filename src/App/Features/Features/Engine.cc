@@ -7,7 +7,8 @@
 #include "cmath"
 
 int prefHitBox = 8;
-std::vector<int> boneList = { 8, 9, 42, 12, 79, 72, 71, 78 };
+int forcefHitBox = 6;
+std::vector<int> boneList = { 8, 9, 42, 43, 6, 5, 12, 79, 72, 71, 78 };
 
 void Engine::onFrame() {
 
@@ -17,7 +18,7 @@ void Engine::onFrame() {
 
             // TODO: test avec asyncKeyState ou avec wndProc
 
-            if ( GetAsyncKeyState(0x06) & 1 ) {
+            if ( GetAsyncKeyState(0x43) & 1 ) {
                 this->forceBone = !this->forceBone;
             }
 
@@ -116,8 +117,10 @@ void Engine::_collectTargetedEnts() {
 
                         tEnt.bonesOnscreen.push_back({ screenOut, boneIndex });
 
-                        if ( screenOut.z < tEnt.closestBone.pos.z || boneIndex == prefHitBox ) {
+                        if ( screenOut.z < tEnt.closestBone.pos.z || boneIndex == forcefHitBox || boneIndex == prefHitBox ) {
                             if ( tEnt.closestBone.id != prefHitBox )
+                                tEnt.closestBone = tEnt.bonesOnscreen.at(tEnt.bonesOnscreen.size() - 1);
+                            if ( tEnt.closestBone.id != forcefHitBox && this->forceBone )
                                 tEnt.closestBone = tEnt.bonesOnscreen.at(tEnt.bonesOnscreen.size() - 1);
                         }
                     }
