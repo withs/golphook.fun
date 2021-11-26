@@ -17,6 +17,7 @@
 #include "Features/Movements.hh"
 #include "Features/Others.hh"
 #include "Features/Engine.hh"
+#include "Features/Skins.hh"
 
 
 class Features: public SharedObject<Features> {
@@ -24,6 +25,7 @@ class Features: public SharedObject<Features> {
          std::unique_ptr<Visuals> visuals;
          std::unique_ptr<Others> others;
          std::unique_ptr<Engine> engine;
+         std::unique_ptr<Skins> skins;
 
          Features();
 };

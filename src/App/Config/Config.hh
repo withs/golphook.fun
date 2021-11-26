@@ -61,6 +61,10 @@ struct Config_t {
     int32_t enginePrefBone = -1;
     int32_t engineOnKeyForceBone = -1;
 
+    // skins
+
+    bool knifeChanger = false;
+
 
     int inslider = 0;
 

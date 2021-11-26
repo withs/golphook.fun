@@ -308,6 +308,18 @@ void Menu::render() {
             case ::VHV:
                 break;
             case ::SKINS:
+                nk_layout_row_dynamic(this->_ctx, 250, 2);
+
+                if ( nk_group_begin(this->_ctx, "skins1", NK_WINDOW_BORDER) ) {
+
+                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+                    nk_layout_row_push(this->_ctx, 0.75f);
+                    nk_checkbox_label(this->_ctx, "Knife changer", &Config::Get().currentCfg().knifeChanger);
+                    nk_layout_row_end(this->_ctx);
+
+                    nk_group_end(this->_ctx);
+                }
+
                 break;
             case ::OTHERS:
 

@@ -22,6 +22,7 @@ void __stdcall FrameStageNotify::hooked(int32_t dum) {
         Features::Get().engine->onFrame();
         Features::Get().visuals->onFrame();
         Features::Get().others->onFrame();
+        Features::Get().skins->onFrame();
         App::Get().entityList.clear();
     }
 }

@@ -3,7 +3,6 @@
 //
 
 #include "CreateMoove.hh"
-#pragma intrinsic(_ReturnAddress)
 
 bool __stdcall CreateMoove::hooked(int sequence_number, float input_sample_frametime, bool active, bool bSendPacket) {
 

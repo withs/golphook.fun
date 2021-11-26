@@ -42,16 +42,11 @@ void App::bootstrap(HMODULE withModuleHandle) {
 #include "Render/DrawTools.hh"
 
 void App::caca() {
-    Color_t bc { };
-    bc.r = 255;
-    bc.g = 0;
-    bc.b = 0;
-    bc.a = 255;
 
-    auto aa = std::shared_ptr<DrawTextb>{ new DrawTextb(Vec2<uint32_t>{ 100, 100}, std::string("hello"), bc) };
 
-    DrawQueue::Get().push(aa);
 }
+
+
 
 void App::run() {
 
@@ -69,6 +64,14 @@ void App::run() {
     while ( true ) {
 
         if ( GetAsyncKeyState(VK_INSERT) & 1 ) {
+        }
+
+        if ( GetAsyncKeyState(0x42) & 1 ) {
+
+
+
+
+
         }
 
         if ( GetAsyncKeyState(VK_END) & 1 ) {
