@@ -32,8 +32,10 @@ void Others::onFrame() {
         if ( Config::Get().currentCfg().fovCircle ) {
             this->_fovCircle();
         }
+        if ( Config::Get().currentCfg().indicators ) {
+            this->_indicators();
+        }
     }
-    this->_indicators();
 }
 
 void Others::overrideViewmodel() {
@@ -145,7 +147,7 @@ void Others::_indicators() {
 
     int count = 0;
 
-    Color_t bc = Config::Get().currentCfg().watermarkCol;
+    Color_t bc = Config::Get().currentCfg().indicatorsCol;
     std::shared_ptr<DrawTextb> aa = std::shared_ptr<DrawTextb>{
         new DrawTextb(
                 Vec2<uint32_t>{static_cast<unsigned int>(App::Get().io.windWidth/2), static_cast<unsigned int>((App::Get().io.windHeight/2 + 20) + (count * 10))},
