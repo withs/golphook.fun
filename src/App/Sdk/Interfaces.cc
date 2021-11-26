@@ -16,6 +16,7 @@ Interfaces::Interfaces() {
     InterfacesCollection::i_inputSystem = this->_getInterface<IInputSystem>("inputsystem.dll", "InputSystemVersion001");
     InterfacesCollection::i_surface = this->_getInterface<ISurface>("vguimatsurface.dll", "VGUI_Surface031");
     InterfacesCollection::i_engineTrace = this->_getInterface<IEngineTrace>("engine.dll", "EngineTraceClient004");
+    InterfacesCollection::i_modelInfo = this->_getInterface<IVModelInfo>("engine.dll", "VModelInfoClient004");
 
     // TODO: faire un fonction createInterfaceFromPatern safe avec error checking
     InterfacesCollection::i_cinput =  *(CInput**)(Mem::patternScan(GetModuleHandleA("client.dll"), "B9 ? ? ? ? F3 0F 11 04 24 FF 50 10") + 1);

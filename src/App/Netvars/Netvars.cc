@@ -47,6 +47,17 @@ NetvarsDumper::NetvarsDumper() {
     NetvarsCollection::m_iDefaultFOV = this->getNetVarOffset("DT_BasePlayer", "m_iDefaultFOV");
     NetvarsCollection::m_fFlags = this->getNetVarOffset("DT_BasePlayer", "m_fFlags");
     NetvarsCollection::m_MoveType = this->getNetVarOffset("DT_BasePlayer", "m_nRenderMode") + 1;
+
+    NetvarsCollection::m_hActiveWeapon = this->getNetVarOffset("DT_BasePlayer", "m_hActiveWeapon");
+    NetvarsCollection::m_iViewModelIndex = this->getNetVarOffset("DT_BaseCombatWeapon", "m_iViewModelIndex");
+    NetvarsCollection::m_nFallbackPaintKit = this->getNetVarOffset("DT_BaseAttributableItem", "m_nFallbackPaintKit");
+    NetvarsCollection::m_nFallbackSeed = this->getNetVarOffset("DT_BaseAttributableItem", "m_nFallbackSeed");
+    NetvarsCollection::m_nFallbackStatTrak = this->getNetVarOffset("DT_BaseAttributableItem", "m_nFallbackStatTrak");
+    NetvarsCollection::m_flFallbackWear = this->getNetVarOffset("DT_BaseAttributableItem", "m_flFallbackWear");
+    NetvarsCollection::m_szCustomName = this->getNetVarOffset("DT_BaseAttributableItem", "m_szCustomName");
+    NetvarsCollection::m_hMyWeapons = this->getNetVarOffset("DT_BasePlayer", "m_hActiveWeapon") - 256;
+
+
 };
 
 

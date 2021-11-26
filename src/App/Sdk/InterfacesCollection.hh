@@ -14,6 +14,7 @@
 #include "Interfaces/client_class.h"
 #include "Interfaces/IEngineTrace.hh"
 #include "Interfaces/CInput.hh"
+#include "Interfaces/IVModelInfo.h"
 
 class InterfacesCollection {
     public:
@@ -26,6 +27,7 @@ class InterfacesCollection {
          static inline ISurface* i_surface;
          static inline IEngineTrace* i_engineTrace;
          static inline CInput* i_cinput;
+         static inline IVModelInfo* i_modelInfo;
 };
 
 

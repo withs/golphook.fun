@@ -46,6 +46,14 @@ class NetvarsCollection {
          static inline uintptr_t m_iDefaultFOV;
          static inline uintptr_t m_fFlags;
          static inline uintptr_t m_MoveType;
+         static inline uintptr_t m_hActiveWeapon;
+         static inline uintptr_t m_iViewModelIndex;
+         static inline uintptr_t m_nFallbackPaintKit;
+         static inline uintptr_t m_nFallbackSeed;
+         static inline uintptr_t m_nFallbackStatTrak;
+         static inline uintptr_t m_flFallbackWear;
+         static inline uintptr_t m_szCustomName;
+         static inline uintptr_t m_hMyWeapons;
 };
 
 #endif //GOLPHOOK_FUN_NETVARSCOLLECTINO_HH

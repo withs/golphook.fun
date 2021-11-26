@@ -166,6 +166,42 @@ class Entity_t {
              return Mem::getValOffset< MoveType_t >(NetvarsCollection::m_MoveType, this);
          }
 
+         Entity_t* activeWeapon() {
+             return Mem::callVirtual< Entity_t*, 267 >(this);
+         }
+
+         int32_t modelIndex() {
+             return Mem::getValOffset< int32_t >(NetvarsCollection::m_nModelIndex, this);
+         }
+
+         int32_t viewModelIndex() {
+             return Mem::getValOffset< int32_t >(NetvarsCollection::m_nViewModelIndex, this);
+         }
+
+         int32_t weaponHandle() {
+             return Mem::getValOffset< int32_t >(NetvarsCollection::m_nViewModelIndex, this);
+         }
+
+         int16_t itemIndex() {
+             return Mem::getValOffset< int16_t >(NetvarsCollection::m_iItemDefinitionIndex, this);
+         }
+
+         uint32_t originalOwnerXuidLow() {
+             return Mem::getValOffset< uint32_t >(NetvarsCollection::m_OriginalOwnerXuidLow, this);
+         }
+
+         uint32_t originalOwnerXuidHigh() {
+             return Mem::getValOffset< uint32_t >(NetvarsCollection::m_OriginalOwnerXuidHigh, this);
+         }
+
+         uint64_t itemIdLow() {
+             return Mem::getValOffset< uint64_t >(NetvarsCollection::m_iItemIDLow, this);
+         }
+
+         int32_t item_id_high() {
+             return Mem::getValOffset< int32_t >(NetvarsCollection::m_iItemIDHigh, this);
+         }
+
 };
 
 #endif //GOLPHOOK_FUN_ENTITY_HH
