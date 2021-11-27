@@ -34,6 +34,10 @@ struct Config_t {
     Color_t boxeCol = Color_t{ 255, 255, 255, 255 };
     Color_t boxeColOcl = Color_t{ 255, 255, 255, 255 };
 
+    bool names = false;
+    Color_t namesCol = Color_t{ 255, 255, 255, 255 };
+    Color_t namesColOcl = Color_t{ 255, 255, 255, 255 };
+
     bool watermark = false;
     Color_t watermarkCol = Color_t{ 255, 255, 255, 255 };
 

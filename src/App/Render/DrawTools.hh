@@ -80,12 +80,14 @@ struct DrawTextb final: public DrawToolBase {
     std::string _content;
     Color_t _color { };
     Vec2<uint32_t> _pos { };
+    bool _centered = false;
 
 
-    DrawTextb(Vec2<uint32_t> toPos, std::string withText, Color_t andColor) {
+    DrawTextb(Vec2<uint32_t> toPos, std::string withText, Color_t andColor, bool andCentered = false) {
         this->_pos = toPos;
         this->_color = andColor;
         this->_content = withText;
+        this->_centered = andCentered;
     };
     bool draw() override;
 

@@ -164,6 +164,59 @@ void Menu::render() {
                     nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
 
                     nk_layout_row_push(this->_ctx, 0.50f);
+                    nk_checkbox_label(this->_ctx, "Names", &(Config::Get().currentCfg().names));
+
+                    if ( Config::Get().currentCfg().names ) {
+
+                        nk_layout_row_push(this->_ctx, 0.25f);
+                        bounds = nk_widget_bounds(this->_ctx);
+
+                        if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().namesCol)), nk_vec2(300,400)) ) {
+                            nk_layout_row_dynamic(this->_ctx, 120, 1);
+
+                            nk_colorf bg = static_cast<nk_colorf>(Config::Get().currentCfg().namesCol);
+
+                            bg = nk_color_picker(this->_ctx, bg, NK_RGBA);
+                            nk_layout_row_dynamic(this->_ctx, 25, 1);
+                            bg.r = nk_propertyf(this->_ctx, "#R:", 0, bg.r, 1.0f, 0.01f,0.005f);
+                            bg.g = nk_propertyf(this->_ctx, "#G:", 0, bg.g, 1.0f, 0.01f,0.005f);
+                            bg.b = nk_propertyf(this->_ctx, "#B:", 0, bg.b, 1.0f, 0.01f,0.005f);
+                            bg.a = nk_propertyf(this->_ctx, "#A:", 0, bg.a, 1.0f, 0.01f,0.005f);
+
+                            Config::Get().currentCfg().namesCol = Color_t(bg);
+                            nk_combo_end(this->_ctx);
+                        }
+
+                        if (nk_input_is_mouse_hovering_rect(in, bounds))
+                            nk_tooltip(this->_ctx, " Visible color");
+
+                        nk_layout_row_push(this->_ctx, 0.25f);
+                        bounds = nk_widget_bounds(this->_ctx);
+                        if ( nk_combo_begin_color(this->_ctx, nk_rgb_cf(static_cast<nk_colorf>(Config::Get().currentCfg().namesColOcl)), nk_vec2(300,400)) ) {
+                            nk_layout_row_dynamic(this->_ctx, 120, 1);
+
+                            nk_colorf bg = static_cast<nk_colorf>(Config::Get().currentCfg().namesColOcl);
+
+                            bg = nk_color_picker(this->_ctx, bg, NK_RGBA);
+                            nk_layout_row_dynamic(this->_ctx, 25, 1);
+                            bg.r = nk_propertyf(this->_ctx, "#R:", 0, bg.r, 1.0f, 0.01f,0.005f);
+                            bg.g = nk_propertyf(this->_ctx, "#G:", 0, bg.g, 1.0f, 0.01f,0.005f);
+                            bg.b = nk_propertyf(this->_ctx, "#B:", 0, bg.b, 1.0f, 0.01f,0.005f);
+                            bg.a = nk_propertyf(this->_ctx, "#A:", 0, bg.a, 1.0f, 0.01f,0.005f);
+
+                            Config::Get().currentCfg().namesColOcl = Color_t(bg);
+                            nk_combo_end(this->_ctx);
+                        }
+
+                        if (nk_input_is_mouse_hovering_rect(in, bounds))
+                            nk_tooltip(this->_ctx, " Occluded color");
+
+                    }
+                    nk_layout_row_end(this->_ctx);
+
+                    nk_layout_row_begin(this->_ctx, NK_DYNAMIC, 25, 2);
+
+                    nk_layout_row_push(this->_ctx, 0.50f);
                     nk_checkbox_label(this->_ctx, "Snapline", &(Config::Get().currentCfg().snaplines));
 
                     if ( Config::Get().currentCfg().snaplines ) {

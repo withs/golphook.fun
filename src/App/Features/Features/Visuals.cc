@@ -19,8 +19,14 @@ void Visuals::onFrame() {
             if ( Config::Get().currentCfg().boxe )
                 this->_boxe(ent);
 
+            if ( Config::Get().currentCfg().names )
+                this->_name(ent);
+
+
             // indics
         }
+
+
 
     }
 }
@@ -109,6 +115,60 @@ void Visuals::_boxe(Entity_t *ent) {
 
         }
     }
+}
+
+void Visuals::_name(Entity_t* ent) {
+
+
+    Vec3 entPos = ent->origin();
+    Vec3 screenOut { };
+
+    if ( Math::worldToScreen(entPos, screenOut) ) {
+
+        if ( screenOut.x <= 0 ||
+             screenOut.y <= 0 ||
+             screenOut.x >= App::Get().io.windWidth
+                ) {
+            return;
+        }
+
+        Vec3 screenHeadOut { };
+        Vec3 headPos = ent->bone(8);
+
+        float dist = Math::distanceToEntity(App::Get().localPlayer->origin(), entPos);
+        headPos.z += 14;
+        headPos.z += dist / 60;
+
+        if ( Math::worldToScreen(headPos, screenHeadOut) ) {
+
+            Color_t bc = Config::Get().currentCfg().namesColOcl;
+
+            std::vector<int32_t> boneToBeVisible = { 8, 42, 12, 79, 72, 71, 78 };
+
+            for ( auto& bone: boneToBeVisible) {
+                if ( this->_canSeePlayer(bone, App::Get().localPlayer, ent) ) {
+                    bc = Config::Get().currentCfg().namesCol;
+                    break;
+                }
+            }
+
+            PlayerInfo_t playerInfo;
+            InterfacesCollection::i_engineClient->GetPlayerInfo(ent->index(), &playerInfo);
+            std::string name = std::string(playerInfo.szName);
+
+            float boxHeight = screenHeadOut.y > screenOut.y ? (screenHeadOut.y - screenOut.y):(screenOut.y - screenHeadOut.y);
+            float boxWidth = boxHeight / 4.f;
+
+            // POV: ici d'est du caca ^^
+
+            std::shared_ptr<DrawTextb> aa;
+            aa = std::shared_ptr<DrawTextb>{ new DrawTextb(Vec2<uint32_t>{static_cast<uint32_t>(screenHeadOut.x - boxWidth), static_cast<uint32_t>(screenHeadOut.y)}, name, bc, false) };
+            DrawQueue::Get().push(aa);
+
+
+        }
+    }
+
 }
 
 void Visuals::_watermark() {

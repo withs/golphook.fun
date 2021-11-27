@@ -57,6 +57,7 @@ class Collideable_t {
 
 class Entity_t {
     public:
+
          void* animating() {
              return static_cast<void*>(this + 4);
          }
@@ -71,6 +72,10 @@ class Entity_t {
 
          bool isAlive() {
              return Mem::callVirtual<bool, 155>(this);
+         }
+
+         int32_t index() {
+             return Mem::callVirtual< int32_t , 10 >(networkable());
          }
 
          CBaseHandle handle() {

@@ -19,6 +19,7 @@ class Visuals {
          void _snapline(Entity_t* ent);
          void _boxe(Entity_t* ent);
          void _watermark();
+         void _name(Entity_t* ent);
 
          bool _canSeePlayer(int32_t hitbox, Entity_t* fromPlayer, Entity_t* ToPlayer);
 

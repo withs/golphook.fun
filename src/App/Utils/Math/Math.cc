@@ -65,3 +65,7 @@ void Math::angleToVectors(Vec3 &withAngle, Vec3 &andFor, Vec3 &andRight, Vec3 &a
     andUp.y = cr * sp * sy + -sr * cy;
     andUp.z = cr * cp;
 }
+
+float Math::distanceToEntity(const Vec3 &fromLocalPlayer, const Vec3 &toEnemy) {
+    return sqrt(pow(fromLocalPlayer.x - toEnemy.x, 2) + pow(fromLocalPlayer.y - toEnemy.y, 2) + pow(fromLocalPlayer.z - toEnemy.z, 2));
+}

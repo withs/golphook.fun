@@ -18,6 +18,7 @@ class Math {
          static bool worldToScreen(const Vec3& in, Vec3& out);
          static void sinCos(float withRadian, float& andSin, float& andCos);
          static void angleToVectors(Vec3& withAngle, Vec3& andYaw, Vec3& andRoll, Vec3& andPitch);
+         static float distanceToEntity(const Vec3& fromLocalPlayer, const Vec3& toEnemy);
 
 };
 

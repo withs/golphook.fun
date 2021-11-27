@@ -68,6 +68,17 @@ void Config::loadConfigFromFile(std::filesystem::path fromPath) {
         fromFileConfig.boxeColOcl.b  = inputJson["cfg"]["boxeColOcl"]["b"];
         fromFileConfig.boxeColOcl.a  = inputJson["cfg"]["boxeColOcl"]["a"];
 
+        fromFileConfig.names = inputJson["cfg"]["names"];
+        fromFileConfig.namesCol.r = inputJson["cfg"]["namesCol"]["r"];
+        fromFileConfig.namesCol.g  = inputJson["cfg"]["namesCol"]["g"];
+        fromFileConfig.namesCol.b  = inputJson["cfg"]["namesCol"]["b"];
+        fromFileConfig.namesCol.a  = inputJson["cfg"]["namesCol"]["a"];
+
+        fromFileConfig.namesColOcl.r = inputJson["cfg"]["namesColOcl"]["r"];
+        fromFileConfig.namesColOcl.g  = inputJson["cfg"]["namesColOcl"]["g"];
+        fromFileConfig.namesColOcl.b  = inputJson["cfg"]["namesColOcl"]["b"];
+        fromFileConfig.namesColOcl.a  = inputJson["cfg"]["namesColOcl"]["a"];
+
         fromFileConfig.watermark = inputJson["cfg"]["watermark"];
         fromFileConfig.watermarkCol.r = inputJson["cfg"]["watermarkCol"]["r"];
         fromFileConfig.watermarkCol.g  = inputJson["cfg"]["watermarkCol"]["g"];
@@ -163,6 +174,19 @@ void Config::saveConfigToFile(std::string withName) {
             {"g", this->currentCfg().boxeColOcl.g},
             {"b", this->currentCfg().boxeColOcl.b},
             {"a", this->currentCfg().boxeColOcl.a}
+        }},
+        {"names", this->currentCfg().names},
+        {"namesCol", {
+            {"r", this->currentCfg().namesCol.r},
+            {"g", this->currentCfg().namesCol.g},
+            {"b", this->currentCfg().namesCol.b},
+            {"a", this->currentCfg().namesCol.a}
+        }},
+        {"namesColOcl", {
+            {"r", this->currentCfg().namesColOcl.r},
+            {"g", this->currentCfg().namesColOcl.g},
+            {"b", this->currentCfg().namesColOcl.b},
+            {"a", this->currentCfg().namesColOcl.a}
         }},
         {"watermark", this->currentCfg().watermark},
         {"watermarkCol", {

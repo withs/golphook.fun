@@ -9,16 +9,6 @@ void Others::onCreateMoove() {
 
     if ( InterfacesCollection::i_engineClient->IsInGame() && InterfacesCollection::i_engineClient->IsConnected() ) {
 
-        if ( Config::Get().currentCfg().indicators ) {
-            /*
-            int32_t queueSize = Indicators::Get().len();
-            for ( int32_t i = 0; i < queueSize ; i++ ) {
-                Indicators::Get().at(i).draw();
-            }
-
-            Indicators::Get().clear();*/
-        }
-
         if ( Config::Get().currentCfg().bop )
             this->_bop();
 
