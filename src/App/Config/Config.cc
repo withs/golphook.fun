@@ -3,11 +3,15 @@
 //
 
 #include "Config.hh"
+#include "App.hh"
+
 
 Config::Config() {
 
-    std::filesystem::path p1("C:\\Users\\fleur\\Documents\\golp");
-    std::filesystem::path p2("C:\\Users\\fleur\\Documents\\golp\\cfg");
+    std::string path = std::string(InterfacesCollection::i_engineClient->GetGameDirectory()) + std::string("\\golp");
+
+    std::filesystem::path p1(path);
+    std::filesystem::path p2(path + std::string("\\cfg"));
 
     if ( !std::filesystem::exists(p1) )
         std::filesystem::create_directory(p1);
@@ -127,7 +131,8 @@ void Config::loadConfigFromFile(std::filesystem::path fromPath) {
 
 void Config::loadConfigFromName(std::string withName) {
 
-    std::filesystem::path configFilePath("C:\\Users\\fleur\\Documents\\golp\\cfg\\" + withName + ".gcfg");
+    std::string path = std::string(InterfacesCollection::i_engineClient->GetGameDirectory()) + std::string("\\golp\\cfg\\" + withName + ".gcfg");
+    std::filesystem::path configFilePath(path);
     this->loadConfigFromFile(configFilePath);
 
     int32_t count = 0;
@@ -234,7 +239,8 @@ void Config::saveConfigToFile(std::string withName) {
     };
     std::string outputJsonString = outputJson.dump();
 
-    std::filesystem::path configFilePath("C:\\Users\\fleur\\Documents\\golp\\cfg\\" + withName + ".gcfg");
+    std::string path = std::string(InterfacesCollection::i_engineClient->GetGameDirectory()) + std::string("\\golp\\cfg\\" + withName + ".gcfg");
+    std::filesystem::path configFilePath(path);
 
     std::ofstream configFile (configFilePath, std::ofstream::out);
 
