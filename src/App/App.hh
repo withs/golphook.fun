@@ -18,6 +18,7 @@
 #include "Features/Features.hh"
 
 struct AppIo {
+    int32_t hello = 670;
     int32_t windHeight = 0;
     int32_t windWidth = 0;
 
