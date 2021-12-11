@@ -45,15 +45,16 @@ Hooks::Hooks() {
                      reinterpret_cast<uintptr_t *>(&FrameStageNotify::hooked),
                      reinterpret_cast<uintptr_t *>(&FrameStageNotify::original), "FrameStageNotify()");
 
-    uint8_t* overideViewAddr = Mem::patternScan(GetModuleHandleA("client.dll"), "55 8B EC 83 E4 F8 83 EC 58 56 57 8B 3D ? ? ? ? 85 FF");
+    uint8_t* overideViewAddr = Mem::patternScan(GetModuleHandleA("client.dll"), "55 8B EC 83 E4 F8 8B 4D 04 83 EC 58");
     this->_applyHook(reinterpret_cast<uintptr_t *>(overideViewAddr),
                      reinterpret_cast<uintptr_t *>(&OverrideView::hooked),
                      reinterpret_cast<uintptr_t *>(&OverrideView::original), "OverrideView()");
 
+    /*¨
     uint8_t* getViewmodelFovAddr = Mem::patternScan(GetModuleHandleA("client.dll"), "55 8B EC 8B 0D ? ? ? ? 83 EC 08 57");
     this->_applyHook(reinterpret_cast<uintptr_t *>(getViewmodelFovAddr),
                      reinterpret_cast<uintptr_t *>(&GetViewmodelFov::hooked),
-                     reinterpret_cast<uintptr_t *>(&GetViewmodelFov::original), "GetViewmodelFov()");
+                     reinterpret_cast<uintptr_t *>(&GetViewmodelFov::original), "GetViewmodelFov()");*/
 
     if (MH_EnableHook(MH_ALL_HOOKS) == MH_OK)
         LOG_INFO << "minhooks success";

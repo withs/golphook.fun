@@ -40,6 +40,7 @@ void Engine::onFrame() {
 
                     this->_aimAt(closestToCrosshair);
                     // TODO: fix ca ^^ c'est vraiment pas bo)
+                    // made this for test at first an i forgot to change it
                     *(int32_t*)((uintptr_t)GetModuleHandleA("client.dll") + 0x31F1D14) = 6;
                 }
             }

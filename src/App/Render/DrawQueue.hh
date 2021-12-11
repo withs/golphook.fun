@@ -13,6 +13,8 @@
 #include <mutex>
 #include <shared_mutex>
 
+// highly inspired from https://github.com/cristeigabriel/HelvetaCS
+
 class DrawQueue: public SharedObject<DrawQueue> {
     private:
          std::shared_mutex _queueMutex;

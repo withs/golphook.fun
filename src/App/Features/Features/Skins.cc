@@ -5,6 +5,8 @@
 #include "Skins.hh"
 #include "App.hh"
 
+
+// pov: im lazy ^^ ( from: https://github.com/0xf1a/xSkins )
 void Skins::_knifeChanger() {
     static uintptr_t g_pClient = (uintptr_t)GetModuleHandleA("client.dll");
 

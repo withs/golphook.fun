@@ -1,4 +1,74 @@
 golphook.fun alpha
+==================
 
-conan install . -if _fakewin/conan/ --build missing --settings arch=x86
-conan install . -if conan/ --build missing --settings arch=x86
+    golphook is my attempt to make a csgo internal written in c++ with basic features and nuklear implementation for the ui,
+    this was made for fun and to use by me after i moved on windows 7 and rbh and skeet wasn't working on it ^^ so i thought making my own was a good idea
+    and it was cool and i learned some cool things. I dont recommend to use it i make it public because i stopped used it.
+    The site associated with it is troll site for me and some friends.
+    Rip -> http://steamcommunity.com/profiles/76561197982818347
+
+
+Known issues
+------------
+
+    - Cannot inject in fullscreen mode
+    - Hardcoded offsets
+    - Crash when watching demo
+    - Aimbot sometime dont shoot
+    - No detection protection
+    - And more ^^
+
+Features
+---------
+
+    Visuals :
+    	- boxes
+    		- custom color
+    		- custom color if visible
+    	- snaplines
+    	    - custom color
+            - custom color if visible
+        - names (buggy)
+            - custom color
+            - custom color if visible
+    	- watermark
+    	    - custom color
+
+    	- indicators
+    	    - fov
+    	    - autoshoot
+    	    - force bones
+
+    Misc :
+    	- clan tag anim
+    	- bhop
+    	- viewmodel changer
+
+    	- basic config system
+        - knife changer
+
+    Engine :
+    	- on key (mouse4) aimbot with autoshoot and fov
+
+
+Build
+-----
+
+    1. git clone https://github.com/withs/golphook.fun
+    2. git submodule update
+    3. conan install . -if conan/ --build missing --settings arch=x86
+    4. cmake -S . -B build
+    5. cmake --build
+
+Resources
+----------
+    - https://github.com/0xf1a/xSkins
+    - https://github.com/patrickcjk/dll-manual-map
+    - https://github.com/cristeigabriel/HelvetaCS
+    - https://github.com/OneshotGH/supremacy
+    - https://github.com/martinjanas/Sensum
+    - https://github.com/bruhmoment21/csgo-imgui-sdk
+    - https://github.com/KittenPopo/csgo-offsets
+    - https://guidedhacking.com (i started to learn game hacking here thanks to them)
+
+    thanks to all these awesome repo which helped me make my project

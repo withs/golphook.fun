@@ -90,9 +90,7 @@ class Entity_t {
          }
 
          Vec3& absOrigin() {
-             //return Mem::callVirtual< Vec3,10 >(this);
-             using original_fn = Vec3 & (__thiscall*)(void*);
-             return (*(original_fn**)this)[10](this);;
+             return Mem::callVirtual< Vec3,10 >(this);
          }
 
          Vec3& absAngle() {

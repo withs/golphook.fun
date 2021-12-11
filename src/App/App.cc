@@ -17,7 +17,7 @@ void App::bootstrap(HMODULE withModuleHandle) {
 
     Utils::waitForModule({ "client.dll", "engine.dll", "vstdlib.dll", "inputsystem.dll", "vguimatsurface.dll"}, 15);
 
-    App::Get().io.windHandle = FindWindowA(0, "Counter-Strike: Global Offensive");
+    App::Get().io.windHandle = FindWindowA(0, "Counter-Strike: Global Offensive - Direct3D 9");
 
     Interfaces::makeShared();
     NetvarsDumper::makeShared();

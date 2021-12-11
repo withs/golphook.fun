@@ -53,6 +53,7 @@ void Others::overrideViewmodel() {
     viewmodelEnt->setAbsAngle(angles);
 }
 
+// from https://github.com/spirthack/CSGOSimple, sorry i was lazy (still lazy the day you see this :) )
 void Others::_bop() {
     static bool jumped_last_tick = false;
     static bool should_fake_jump = false;

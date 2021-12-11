@@ -4,6 +4,7 @@
 
 #include "Mem.hh"
 
+// from https://github.com/spirthack/CSGOSimple
 uint8_t* Mem::patternScan(void* module, const char* signature) {
     static auto pattern_to_byte = [](const char* pattern) {
         auto bytes = std::vector<int>{};
